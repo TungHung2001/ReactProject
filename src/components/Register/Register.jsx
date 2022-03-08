@@ -1,7 +1,8 @@
-import { useState } from "react"
-import FormInput from "../components/FormInput"
+import React, { useState } from "react"
+import FormInput from "./FormInput"
 import styled from "styled-components"
-import Selection from "../components/Selection"
+import Selection from "./Selection"
+import ChoosePic from "./ChoosePic"
 
 const FormLog = styled.div`
   display: flex;
@@ -110,7 +111,7 @@ const LoginForm = () => {
   }
 
   return (
-    <>
+    <React.Fragment>
       <FormLog>
         <Form onSubmit={handleSubmit}>
           <H1>Register</H1>
@@ -129,10 +130,13 @@ const LoginForm = () => {
             <option value=""></option>
           </select> */}
           <Selection />
+
+          <ChoosePic />
+
           <Button>Submit</Button>
         </Form>
       </FormLog>
-    </>
+    </React.Fragment>
   )
 }
 

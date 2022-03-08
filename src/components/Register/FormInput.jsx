@@ -38,6 +38,7 @@ const FormInput = (props) => {
           }
           focused={focused.toString()}
         />
+
         <Span>{errorMessage}</Span>
       </Finput>
     </>
