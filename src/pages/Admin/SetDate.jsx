@@ -9,22 +9,18 @@ const Main = styled.div`
   height: 80vh;
   background-size: cover;
 `
-const Form = styled.form`
-  border-radius: 10px;
-  background-color: #f0f2f5;
-  padding: 0px 60px;
-  display: flex;
-  flex-direction: column;
-`
-const H2 = styled.h1`
-  text-align: center;
-  color: #1775ee;
-`
 const Label = styled.label`
   font-size: 15px;
   color: gray;
 `
 const Input = styled.input``
+const H1 = styled.h1`
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: #1775ee;
+`
+
 const Button = styled.button`
   width: 100%;
   height: 50px;
@@ -38,8 +34,16 @@ const Button = styled.button`
   margin-top: 15px;
   margin-bottom: 30px;
 `
-const Category = () => {
+const Form = styled.form`
+  border-radius: 10px;
+  background-color: #f0f2f5;
+  padding: 0px 60px;
+  display: flex;
+  flex-direction: column;
+`
+const SetDate = () => {
   const { handleSubmit } = useForm()
+
   const onSubmit = (e) => {
     console.log(e)
   }
@@ -47,10 +51,11 @@ const Category = () => {
     <>
       <Main>
         <Form onSubmit={handleSubmit(onSubmit)}>
-          <H2>New Category</H2>
-          <Label>Category</Label>
-          <Input placeholder="Category" type="text" />
-
+          <H1>Set date</H1>
+          <Label>Start Date</Label>
+          <Input placeholder="Start Date" type="date" />
+          <Label>End Date</Label>
+          <Input placeholder="End Date" type="date" />
           <Button type="submit">Submit</Button>
         </Form>
       </Main>
@@ -58,4 +63,4 @@ const Category = () => {
   )
 }
 
-export default Category
+export default SetDate

@@ -14,7 +14,7 @@ const FormLog = styled.div`
   background-position: center;
 `
 const Form = styled.form`
-  background-color: #404079;
+  background-color: #f0f2f5;
   padding: 0px 60px;
   border-radius: 10px;
 `
@@ -23,7 +23,7 @@ const Button = styled.button`
   height: 50px;
   padding: 10px;
   border: none;
-  background-color: red;
+  background-color: #1775ee;
   color: white;
   font-weight: bold;
   font-size: 18px;
@@ -32,7 +32,7 @@ const Button = styled.button`
   margin-bottom: 30px;
 `
 const H1 = styled.h1`
-  color: #be150f;
+  color: #1775ee;
   text-align: center;
 `
 const LoginForm = () => {

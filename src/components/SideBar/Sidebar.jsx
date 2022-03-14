@@ -13,7 +13,7 @@ const Nav = styled.div`
 `
 const SidebarNav = styled.div`
   background: #15171c;
-  width: 250px;
+  width: 170px;
   height: 100vh;
   display: flex;
   justify-content: center;
@@ -139,6 +139,12 @@ const Sidebar = () => {
           </SidebarLink>
           <SidebarLink to="/NewCategory">
             <SidebarLabel>NewCategory</SidebarLabel>
+          </SidebarLink>
+          <SidebarLink to="/Manage">
+            <SidebarLabel>Manage</SidebarLabel>
+          </SidebarLink>
+          <SidebarLink to="/SetDate">
+            <SidebarLabel>SetDate</SidebarLabel>
           </SidebarLink>
           <SidebarLink to="/test">
             <SidebarLabel>Test</SidebarLabel>

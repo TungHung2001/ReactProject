@@ -23,6 +23,7 @@ export const Posts = [
   },
   {
     id: 2,
+    desc: "Love For All, Hatred For None.The overflow property specifies whether to clip content or to add scrollbars when an element's content is too big to fit in a specified area.ttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt",
     photo: "Pic/Ben.jpg",
     date: "15 mins ago",
     userId: 2,

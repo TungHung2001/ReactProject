@@ -1,19 +1,22 @@
 import { useState } from "react"
-// Import Worker
+import { useForm } from "react-hook-form"
 import { Worker } from "@react-pdf-viewer/core"
-// Import the main Viewer component
 import { Viewer } from "@react-pdf-viewer/core"
-// Import the styles
 import "@react-pdf-viewer/core/lib/styles/index.css"
-// default layout plugin
 import { defaultLayoutPlugin } from "@react-pdf-viewer/default-layout"
-// Import styles of default layout plugin
 import "@react-pdf-viewer/default-layout/lib/styles/index.css"
 import styled from "styled-components"
-const Main = styled.div``
+const Main = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-position: center;
+  height: 70vh;
+  background-size: cover;
+`
 const Form = styled.form`
   border-radius: 10px;
-  background-color: #404079;
+  background-color: #f0f2f5;
   padding: 0px 60px;
   display: flex;
   flex-direction: column;
@@ -28,20 +31,33 @@ const Button = styled.button`
   font-weight: bold;
   font-size: 15px;
   color: white;
-  background-color: #f10a0a;
+  background-color: #1775ee;
   margin-top: 15px;
   margin-bottom: 30px;
 `
 const Pdf = styled.div`
   width: 100%;
-  height: 800px;
+  height: 700px;
   background-color: #e4e4e4;
   overflow-y: auto;
   display: flex;
   justify-content: center;
   align-items: center;
 `
+const H2 = styled.h1`
+  text-align: center;
+  color: #1775ee;
+`
+const Label = styled.label`
+  font-size: 15px;
+  color: gray;
+`
 const Addpdf = () => {
+  const { handleSubmit } = useForm()
+
+  const onSubmit = (e) => {
+    console.log(e)
+  }
   // creating new plugin instance
   const defaultLayoutPluginInstance = defaultLayoutPlugin()
 
@@ -74,24 +90,29 @@ const Addpdf = () => {
   }
 
   return (
-    <Main>
-      {/* Upload PDF */}
-      <Form>
-        <label>
-          <h5>Upload PDF</h5>
-        </label>
-        <br></br>
+    <>
+      <Main>
+        {/* Upload PDF */}
+        <Form onSubmit={handleSubmit(onSubmit)}>
+          <H2>New Idea</H2>
+          <Label>Title</Label>
+          <Input placeholder="Title" type="text" />
+          <Label>Description</Label>
+          <Input placeholder="Description" type="text" />
 
-        <Input type="file" className="form-control" onChange={handleFile} />
+          <Input type="file" className="form-control" onChange={handleFile} />
+          {/* add file pdf*/}
 
-        {/* we will display error message in case user select some file
+          {/* we will display error message in case user select some file
         other than pdf */}
-        {pdfError && <span className="text-danger">{pdfError}</span>}
-      </Form>
+          {pdfError && <span className="text-danger">{pdfError}</span>}
+          <Button type="submit">Submit</Button>
+        </Form>
 
-      {/* View PDF */}
-      <h5>View PDF</h5>
-      <div className="viewer">
+        {/* View PDF */}
+      </Main>
+      <H2>View PDF</H2>
+      <Pdf>
         {/* render this if we have a pdf file */}
         {pdfFile && (
           <Worker workerUrl="https://unpkg.com/pdfjs-dist@2.13.216/build/pdf.worker.min.js">
@@ -104,8 +125,8 @@ const Addpdf = () => {
 
         {/* render this if we have pdfFile state null   */}
         {!pdfFile && <>No file is selected yet</>}
-      </div>
-    </Main>
+      </Pdf>
+    </>
   )
 }
 

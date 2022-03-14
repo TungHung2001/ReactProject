@@ -1,0 +1,19 @@
+.active-like{
+    background-color: #4267B2;
+    color: #f5f5f5;
+}
+.active-dislike{
+    background-color: #E50914;
+    color: #f5f5f5;
+}
+.ThumpUp{
+    background-color:#4267B2 ;
+    border-radius: 50%;
+    
+    color:#f5f5f5;
+}
+.ThumpDown{
+    background-color: #E50914;
+    border-radius: 50%;
+    color:#f5f5f5;
+}

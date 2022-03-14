@@ -1,12 +1,13 @@
-import React, { useState } from "react"
+import React from "react"
 import styled from "styled-components"
-import ThumbDownAltSharpIcon from "@mui/icons-material/ThumbDownAltSharp"
-import ThumbUpSharpIcon from "@mui/icons-material/ThumbUpSharp"
+
 import MoreVertRoundedIcon from "@mui/icons-material/MoreVertRounded"
 import { Users } from "../../TestPeopleData"
-import Comment from "./Comment"
-import TextField from "./TextField"
 
+import { Link } from "react-router-dom"
+import PostPdf from "../Idea-PDF/PostPdf"
+import Like from "../Like/Like"
+import Comment12 from "./Comment1"
 const Main = styled.div`
   width: 100%;
   border-radius: 10px;
@@ -28,7 +29,7 @@ const Ava = styled.img`
   border-radius: 50%;
   object-fit: cover;
 `
-const PostImg = styled.img`
+const PostImg = styled.div`
   margin-top: 20px;
   width: 100%;
   max-height: 500px;
@@ -47,7 +48,10 @@ const PUserName = styled.span`
 const PDate = styled.span`
   font-size: 12px;
 `
-const PText = styled.span``
+const PText = styled.span`
+  overflow: auto;
+  display: flex;
+`
 const PostCenter = styled.div`
   margin: 20px 0;
 `
@@ -61,35 +65,23 @@ const PBL = styled.div`
   align-items: center;
 `
 const PBR = styled.div``
-const LikeCounter = styled.span`
-  font-size: 15px;
-`
-const Comment1 = styled.span`
-  cursor: pointer;
-  border-bottom: 1px dashed gray;
-  font-size: 15px;
-`
 
 const IconLike = styled.div`
-  cursor: pointer;
   margin-right: 5px;
   margin-left: 5px;
 `
+const PDF = styled(Link)``
+const LinkLabel = styled.button`
+  width: 100px;
+  height: 40px;
+  color: white;
+  font-weight: bold;
+  font-size: 13px;
+  background-color: #0427ee;
+  border: none;
+`
+
 const Post = ({ post }) => {
-  const [like, setLike] = useState(post.like)
-  const [isLike, setisLike] = useState(false)
-
-  const likeHandler = () => {
-    setLike(isLike ? like - 1 : like + 1)
-    setisLike(!isLike)
-  }
-  const [dislike, setDisLike] = useState(post.dislike)
-  const [isdisLike, setisDisLike] = useState(false)
-
-  const DislikeHandler = () => {
-    setDisLike(isdisLike ? dislike - 1 : dislike + 1)
-    setisDisLike(!isdisLike)
-  }
   return (
     <Main>
       <Wrapper>
@@ -108,35 +100,27 @@ const Post = ({ post }) => {
         </PostTop>
         <PostCenter>
           <PText>{post?.desc}</PText>
-          <PostImg src={post.photo}></PostImg>
+          <PostImg>
+            <PostPdf />
+          </PostImg>
+
+          {/* {post.photo} */}
         </PostCenter>
         <PostBottom>
           <PBL>
             <IconLike>
-              <ThumbUpSharpIcon onClick={likeHandler} fontSize="large" />
+              <Like />
             </IconLike>
-            <LikeCounter onClick={likeHandler}>{like} like</LikeCounter>
-            <IconLike>
-              <ThumbDownAltSharpIcon
-                fontSize="large"
-                onClick={DislikeHandler}
-              ></ThumbDownAltSharpIcon>
-            </IconLike>
-            <LikeCounter onClick={DislikeHandler}>
-              {dislike} Dislike
-            </LikeCounter>
-            {/* <LikeIcon
-              src="Pic/like.png"
-              onClick={likeHandler}
-              alt=""
-            ></LikeIcon> */}
           </PBL>
           <PBR>
-            <Comment1>{post.comment} comments</Comment1>
+            <br />
+            {/* vao file Idea/ShowPdf */}
+            <PDF to="/ViewPdf" target="_blank">
+              <LinkLabel>View PDF</LinkLabel>
+            </PDF>
           </PBR>
         </PostBottom>
-        <TextField></TextField>
-        <Comment></Comment>
+        <Comment12 />
       </Wrapper>
     </Main>
   )
