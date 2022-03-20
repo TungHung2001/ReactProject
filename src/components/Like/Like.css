@@ -9,11 +9,13 @@
 .ThumpUp{
     background-color:#4267B2 ;
     border-radius: 50%;
-    
+    width: 100px;
     color:#f5f5f5;
 }
 .ThumpDown{
     background-color: #E50914;
     border-radius: 50%;
+    width: 32px;
+    height: 32px;
     color:#f5f5f5;
 }

@@ -4,6 +4,7 @@ import "./Like.css"
 
 import ThumbUpOffAltSharpIcon from "@mui/icons-material/ThumbUpOffAltSharp"
 import ThumbDownSharpIcon from "@mui/icons-material/ThumbDownSharp"
+import { red } from "@mui/material/colors"
 const Main = styled.div`
   display: flex;
   flex-direction: column;
@@ -25,6 +26,9 @@ const P = styled.p`
 `
 const Num = styled.div`
   display: flex;
+`
+const Icon = styled.div`
+  margin: 5px;
 `
 const Blike = styled.div``
 const Like = () => {
@@ -66,14 +70,22 @@ const Like = () => {
     <>
       <Main>
         <Num>
-          <P>
-            <ThumbUpOffAltSharpIcon className="ThumpUp" fontSize="small" />{" "}
-            {like}
-          </P>
-          <P>
-            <ThumbDownSharpIcon className="ThumpDown" fontSize="small" />{" "}
-            {dislike}
-          </P>
+          <Icon>
+            <ThumbUpOffAltSharpIcon
+              className="ThumpUp"
+              fontSize="medium"
+              variant="contained"
+            />{" "}
+          </Icon>
+          <P>{like}</P>
+          <Icon>
+            <ThumbDownSharpIcon
+              className="ThumpDown"
+              fontSize="medium"
+              variant="contained"
+            />{" "}
+          </Icon>
+          <P>{dislike}</P>
         </Num>
         <Blike>
           <Button

@@ -1,4 +1,8 @@
 import { useState } from "react"
+import * as React from "react"
+import Checkbox from "@mui/material/Checkbox"
+import Snackbar from "@mui/material/Snackbar"
+import MuiAlert from "@mui/material/Alert"
 import { useForm } from "react-hook-form"
 import { Worker } from "@react-pdf-viewer/core"
 import { Viewer } from "@react-pdf-viewer/core"
@@ -6,6 +10,7 @@ import "@react-pdf-viewer/core/lib/styles/index.css"
 import { defaultLayoutPlugin } from "@react-pdf-viewer/default-layout"
 import "@react-pdf-viewer/default-layout/lib/styles/index.css"
 import styled from "styled-components"
+
 const Main = styled.div`
   display: flex;
   align-items: center;
@@ -54,20 +59,25 @@ const Label = styled.label`
 `
 const Addpdf = () => {
   const { handleSubmit } = useForm()
-
   const onSubmit = (e) => {
     console.log(e)
   }
-  // creating new plugin instance
+  const [isDisabled, setIsDisabled] = useState(true)
+  const [checked, setChecked] = useState(false)
+
+  const canBeSubmitted = () => {
+    return checked ? setIsDisabled(true) : setIsDisabled(false)
+  }
+
+  const onCheckboxClick = () => {
+    setChecked(!checked)
+    return canBeSubmitted()
+  }
+  const label = { inputProps: { "aria-label": "Checkbox demo" } }
   const defaultLayoutPluginInstance = defaultLayoutPlugin()
-
-  // pdf file onChange state
   const [pdfFile, setPdfFile] = useState(null)
-
-  // pdf file error state
   const [pdfError, setPdfError] = useState("")
 
-  // handle file onChange event
   const allowedFiles = ["application/pdf"]
   const handleFile = (e) => {
     let selectedFile = e.target.files[0]
@@ -89,6 +99,23 @@ const Addpdf = () => {
     }
   }
 
+  const [open, setOpen] = React.useState(false)
+
+  const handleClick = () => {
+    setOpen(true)
+  }
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return
+    }
+
+    setOpen(false)
+  }
+  const Alert = React.forwardRef(function Alert(props, ref) {
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />
+  })
+
   return (
     <>
       <Main>
@@ -101,14 +128,34 @@ const Addpdf = () => {
           <Input placeholder="Description" type="text" />
 
           <Input type="file" className="form-control" onChange={handleFile} />
-          {/* add file pdf*/}
 
-          {/* we will display error message in case user select some file
-        other than pdf */}
           {pdfError && <span className="text-danger">{pdfError}</span>}
-          <Button type="submit">Submit</Button>
+          <div>
+            <Checkbox
+              {...label}
+              sx={{ "& .MuiSvgIcon-root": { fontSize: 28 } }}
+              onClick={onCheckboxClick}
+            />
+            <span>Agree to Term and Condition</span>
+          </div>
+          <Button
+            type="submit"
+            variant="outlined"
+            onClick={handleClick}
+            disabled={isDisabled}
+          >
+            Submit
+          </Button>
         </Form>
-
+        <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+          <Alert
+            onClose={handleClose}
+            severity="success"
+            sx={{ width: "100%" }}
+          >
+            Submit success
+          </Alert>
+        </Snackbar>
         {/* View PDF */}
       </Main>
       <H2>View PDF</H2>

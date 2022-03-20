@@ -22,119 +22,24 @@ const Link1 = styled(Link)`
   justify-content: center;
 `
 const columns = [
-  { id: "id", label: "ID", minWidth: 50 },
-  { id: "user", label: "User", minWidth: 50 },
-  { id: "role", label: "Role", minWidth: 50 },
-  { id: "department", label: "Department", minWidth: 50 },
-  { id: "username", label: "Username", minWidth: 50 },
-  { id: "password", label: "Password", minWidth: 50 },
-  { id: "name", label: "Name", minWidth: 50 },
-  { id: "email", label: "Email", minWidth: 50 },
+  { id: "title", label: "Title", minWidth: 50 },
+  { id: "startdate", label: "StartDate", minWidth: 50 },
+  { id: "starttime", label: "StartTime", minWidth: 50 },
+  { id: "enddate", label: "EndDate", minWidth: 50 },
+  { id: "endtime", label: "EndDate", minWidth: 50 },
 ]
 
-function createData(
-  id,
-  user,
-  role,
-  department,
-  username,
-  password,
-  name,
-  email
-) {
+function createData(title, startdate, starttime, enddate, endtime) {
   return {
-    id,
-    user,
-    role,
-    department,
-    username,
-    password,
-    name,
-    email,
+    title,
+    startdate,
+    starttime,
+    enddate,
+    endtime,
   }
 }
-const rows = [
-  createData(
-    1,
-    "Lan",
-    "Admin",
-    "Hanoi",
-    "admin",
-    "123456",
-    "Lan",
-    "Lan@gmail.com"
-  ),
-  createData(
-    1,
-    "Lan",
-    "Admin",
-    "Hanoi",
-    "admin",
-    "123456",
-    "Lan",
-    "Lan@gmail.com"
-  ),
-  createData(
-    1,
-    "Lan",
-    "Admin",
-    "Hanoi",
-    "admin",
-    "123456",
-    "Lan",
-    "Lan@gmail.com"
-  ),
-  createData(
-    1,
-    "Lan",
-    "Admin",
-    "Hanoi",
-    "admin",
-    "123456",
-    "Lan",
-    "Lan@gmail.com"
-  ),
-  createData(
-    1,
-    "Lan",
-    "Admin",
-    "Hanoi",
-    "admin",
-    "123456",
-    "Lan",
-    "Lan@gmail.com"
-  ),
-  createData(
-    1,
-    "Lan",
-    "Admin",
-    "Hanoi",
-    "admin",
-    "123456",
-    "Lan",
-    "Lan@gmail.com"
-  ),
-  createData(
-    1,
-    "Lan",
-    "Admin",
-    "Hanoi",
-    "admin",
-    "123456",
-    "Lan",
-    "Lan@gmail.com"
-  ),
-  createData(
-    1,
-    "Lan",
-    "Admin",
-    "Hanoi",
-    "admin",
-    "123456",
-    "Lan",
-    "Lan@gmail.com"
-  ),
-]
+
+const rows = [createData("Phone", "3/10/2022", "10:30", "6/10/2022", "12:30")]
 export default function StickyHeadTable() {
   const [page, setPage] = React.useState(0)
   const [rowsPerPage, setRowsPerPage] = React.useState(10)
@@ -150,9 +55,10 @@ export default function StickyHeadTable() {
 
   return (
     <Paper sx={{ width: "100%", overflow: "hidden" }}>
-      <Link1 to="/Register">
-        <Button>Register</Button>
+      <Link1 to="/SetDate">
+        <Button>SetDate</Button>
       </Link1>
+
       <TableContainer sx={{ maxHeight: 440 }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>

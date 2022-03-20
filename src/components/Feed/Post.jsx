@@ -100,9 +100,7 @@ const Post = ({ post }) => {
         </PostTop>
         <PostCenter>
           <PText>{post?.desc}</PText>
-          <PostImg>
-            <PostPdf />
-          </PostImg>
+          <PostImg>{/* <PostPdf /> */}</PostImg>
 
           {/* {post.photo} */}
         </PostCenter>

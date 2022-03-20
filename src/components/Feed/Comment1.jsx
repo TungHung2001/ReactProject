@@ -65,12 +65,13 @@ const LoadM = styled.button`
   height: 20px;
 `
 const Comment1 = () => {
-  const [noOfElement, setnoElement] = useState(3)
+  const [noOfElement, setnoElement] = useState(1)
   const loadMore = () => {
-    setnoElement(noOfElement + noOfElement)
+    setnoElement(noOfElement + noOfElement + 1)
   }
 
   const slice = ComData.cdata.slice(0, noOfElement)
+
   return (
     <>
       <Main>

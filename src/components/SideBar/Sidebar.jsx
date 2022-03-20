@@ -137,14 +137,14 @@ const Sidebar = () => {
           <SidebarLink to="/NewIdea">
             <SidebarLabel>NewIdea</SidebarLabel>
           </SidebarLink>
-          <SidebarLink to="/NewCategory">
-            <SidebarLabel>NewCategory</SidebarLabel>
+          <SidebarLink to="/Category">
+            <SidebarLabel>Category</SidebarLabel>
           </SidebarLink>
           <SidebarLink to="/Manage">
             <SidebarLabel>Manage</SidebarLabel>
           </SidebarLink>
-          <SidebarLink to="/SetDate">
-            <SidebarLabel>SetDate</SidebarLabel>
+          <SidebarLink to="/Date">
+            <SidebarLabel>Date</SidebarLabel>
           </SidebarLink>
           <SidebarLink to="/test">
             <SidebarLabel>Test</SidebarLabel>

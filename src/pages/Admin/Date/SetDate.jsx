@@ -1,6 +1,8 @@
 import * as React from "react"
+
 import Snackbar from "@mui/material/Snackbar"
 import MuiAlert from "@mui/material/Alert"
+import TextField from "@mui/material/TextField"
 import styled from "styled-components"
 import { useForm } from "react-hook-form"
 const Main = styled.div`
@@ -11,22 +13,18 @@ const Main = styled.div`
   height: 80vh;
   background-size: cover;
 `
-const Form = styled.form`
-  border-radius: 10px;
-  background-color: #f0f2f5;
-  padding: 0px 60px;
-  display: flex;
-  flex-direction: column;
-`
-const H2 = styled.h1`
-  text-align: center;
-  color: #1775ee;
-`
 const Label = styled.label`
   font-size: 15px;
   color: gray;
 `
 const Input = styled.input``
+const H1 = styled.h1`
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: #1775ee;
+`
+
 const Button = styled.button`
   width: 100%;
   height: 50px;
@@ -40,12 +38,19 @@ const Button = styled.button`
   margin-top: 15px;
   margin-bottom: 30px;
 `
+const Form = styled.form`
+  border-radius: 10px;
+  background-color: #f0f2f5;
+  padding: 0px 60px;
+  display: flex;
+  flex-direction: column;
+`
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />
 })
-
-const Category = () => {
+const SetDate = () => {
   const { handleSubmit } = useForm()
+
   const onSubmit = (e) => {
     console.log(e)
   }
@@ -62,15 +67,35 @@ const Category = () => {
 
     setOpen(false)
   }
-
   return (
     <>
       <Main>
         <Form onSubmit={handleSubmit(onSubmit)}>
-          <H2>New Category</H2>
-          <Label>Category</Label>
-          <Input placeholder="Category" type="text" />
+          <H1>Set date</H1>
+          <Label>Title</Label>
+          <Input placeholder="title" type="text" />
 
+          <TextField
+            id="startdate"
+            label="Start Date"
+            type="datetime-local"
+            defaultValue="2022-03-10T10:30"
+            sx={{ width: 250, backgroundColor: "white" }}
+            InputLabelProps={{
+              shrink: true,
+            }}
+          />
+          <br />
+          <TextField
+            id="enddate"
+            label="End Date"
+            type="datetime-local"
+            defaultValue="2022-03-10T12:00"
+            sx={{ width: 250, backgroundColor: "white" }}
+            InputLabelProps={{
+              shrink: true,
+            }}
+          />
           <Button type="submit" variant="outlined" onClick={handleClick}>
             Submit
           </Button>
@@ -81,7 +106,7 @@ const Category = () => {
             severity="success"
             sx={{ width: "100%" }}
           >
-            Submit sucess
+            Submit success!!!
           </Alert>
         </Snackbar>
       </Main>
@@ -89,4 +114,4 @@ const Category = () => {
   )
 }
 
-export default Category
+export default SetDate
