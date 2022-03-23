@@ -1,25 +1,24 @@
-import { useState } from "react"
+import React from "react"
+import "@toast-ui/editor/dist/toastui-editor.css"
+
+import { Editor } from "@toast-ui/react-editor"
+import styled from "styled-components"
+const Main = styled.div`
+  display: flex;
+  width: 80%;
+`
 
 const Test = () => {
-  const [isDisabled, setIsDisabled] = useState(true)
-  const [checked, setChecked] = useState(false)
-
-  const canBeSubmitted = () => {
-    return checked ? setIsDisabled(true) : setIsDisabled(false)
-  }
-
-  const onCheckboxClick = () => {
-    setChecked(!checked)
-    return canBeSubmitted()
-  }
-
   return (
-    <div className="App">
-      <input type="checkbox" onClick={onCheckboxClick} />
-      <button type="submit" disabled={isDisabled}>
-        Submit
-      </button>
-    </div>
+    <Main>
+      <Editor
+        initialValue="hello react editor world!"
+        previewStyle="vertical"
+        height="600px"
+        initialEditType="markdown"
+        useCommandShortcut={true}
+      />
+    </Main>
   )
 }
 

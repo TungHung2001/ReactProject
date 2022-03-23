@@ -1,127 +1,137 @@
-import axios from "axios"
-import { useState } from "react"
-import jwt_decode from "jwt-decode"
-import "./Login.css"
-const Login = () => {
-  const [user, setUser] = useState(null)
-  const [username, setUsername] = useState("")
-  const [password, setPassword] = useState("")
-  const [error, setError] = useState(false)
-  const [success, setSuccess] = useState(false)
+import React, { Component } from "react"
+import Form from "react-validation/build/form"
+import Input from "react-validation/build/input"
+import CheckButton from "react-validation/build/button"
+import AuthService from "../../services/auth.service"
 
-  const refreshToken = async () => {
-    try {
-      const res = await axios.post("/refresh", { token: user.refreshToken })
-      setUser({
-        ...user,
-        accessToken: res.data.accessToken,
-        refreshToken: res.data.refreshToken,
-      })
-      return res.data
-    } catch (err) {
-      console.log(err)
+const required = (value) => {
+  if (!value) {
+    return (
+      <div className="alert alert-danger" role="alert">
+        This field is required!
+      </div>
+    )
+  }
+}
+export default class Login extends Component {
+  constructor(props) {
+    super(props)
+    this.handleLogin = this.handleLogin.bind(this)
+    this.onChangeUsername = this.onChangeUsername.bind(this)
+    this.onChangePassword = this.onChangePassword.bind(this)
+    this.state = {
+      username: "",
+      password: "",
+      loading: false,
+      message: "",
     }
   }
-
-  const axiosJWT = axios.create()
-
-  axiosJWT.interceptors.request.use(
-    async (config) => {
-      let currentDate = new Date()
-      const decodedToken = jwt_decode(user.accessToken)
-      if (decodedToken.exp * 1000 < currentDate.getTime()) {
-        const data = await refreshToken()
-        config.headers["authorization"] = "Bearer " + data.accessToken
-      }
-      return config
-    },
-    (error) => {
-      return Promise.reject(error)
-    }
-  )
-
-  const handleSubmit = async (e) => {
+  onChangeUsername(e) {
+    this.setState({
+      username: e.target.value,
+    })
+  }
+  onChangePassword(e) {
+    this.setState({
+      password: e.target.value,
+    })
+  }
+  handleLogin(e) {
     e.preventDefault()
-    try {
-      const res = await axios.post("/login", { username, password })
-      setUser(res.data)
-    } catch (err) {
-      console.log(err)
-    }
-  }
-
-  const handleDelete = async (id) => {
-    setSuccess(false)
-    setError(false)
-    try {
-      await axiosJWT.delete("/users/" + id, {
-        headers: { authorization: "Bearer " + user.accessToken },
+    this.setState({
+      message: "",
+      loading: true,
+    })
+    this.form.validateAll()
+    if (this.checkBtn.context._errors.length === 0) {
+      AuthService.login(this.state.username, this.state.password).then(
+        () => {
+          this.props.history.push("/profile")
+          window.location.reload()
+        },
+        (error) => {
+          const resMessage =
+            (error.response &&
+              error.response.data &&
+              error.response.data.message) ||
+            error.message ||
+            error.toString()
+          this.setState({
+            loading: false,
+            message: resMessage,
+          })
+        }
+      )
+    } else {
+      this.setState({
+        loading: false,
       })
-      setSuccess(true)
-    } catch (err) {
-      setError(true)
     }
   }
-  return (
-    <>
-      <div className="container">
-        {user ? (
-          <div className="home">
-            <span>
-              Welcome to the <b>{user.isAdmin ? "admin" : "user"}</b> dashboard{" "}
-              <b>{user.username}</b>.
-            </span>
-            <span>Delete Users:</span>
-            <button className="deleteButton" onClick={() => handleDelete(1)}>
-              Delete John
-            </button>
-            <button className="deleteButton" onClick={() => handleDelete(2)}>
-              Delete Jane
-            </button>
-            {error && (
-              <span className="error">
-                You are not allowed to delete this user!
-              </span>
-            )}
-            {success && (
-              <span className="success">
-                User has been deleted successfully...
-              </span>
-            )}
-          </div>
-        ) : (
-          <div className="login">
-            <div className="loginWrapper">
-              <div className="loginLeft">
-                <h3 className="loginLogo">The Login Form</h3>
-              </div>
-              <div className="loginRight">
-                <div className="loginBox">
-                  <form onSubmit={handleSubmit} className="Form">
-                    <input
-                      className="loginInput"
-                      type="text"
-                      placeholder="username"
-                      onChange={(e) => setUsername(e.target.value)}
-                    />
-                    <input
-                      className="loginInput"
-                      type="password"
-                      placeholder="password"
-                      onChange={(e) => setPassword(e.target.value)}
-                    />
-                    <button type="submit" className="loginButton">
-                      Login
-                    </button>
-                  </form>
+  render() {
+    return (
+      <div className="col-md-12">
+        <div className="card card-container">
+          <img
+            src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
+            alt="profile-img"
+            className="profile-img-card"
+          />
+          <Form
+            onSubmit={this.handleLogin}
+            ref={(c) => {
+              this.form = c
+            }}
+          >
+            <div className="form-group">
+              <label htmlFor="username">Username</label>
+              <Input
+                type="text"
+                className="form-control"
+                name="username"
+                value={this.state.username}
+                onChange={this.onChangeUsername}
+                validations={[required]}
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="password">Password</label>
+              <Input
+                type="password"
+                className="form-control"
+                name="password"
+                value={this.state.password}
+                onChange={this.onChangePassword}
+                validations={[required]}
+              />
+            </div>
+            <div className="form-group">
+              <button
+                className="btn btn-primary btn-block"
+                disabled={this.state.loading}
+              >
+                {this.state.loading && (
+                  <span className="spinner-border spinner-border-sm"></span>
+                )}
+                <span>Login</span>
+              </button>
+            </div>
+            {this.state.message && (
+              <div className="form-group">
+                <div className="alert alert-danger" role="alert">
+                  {this.state.message}
                 </div>
               </div>
-            </div>
-          </div>
-        )}
+            )}
+            <CheckButton
+              style={{ display: "none" }}
+              ref={(c) => {
+                this.checkBtn = c
+              }}
+            />
+          </Form>
+        </div>
       </div>
-    </>
-  )
+    )
+  }
 }
-
-export default Login

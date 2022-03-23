@@ -1,19 +1,16 @@
 import './App.css';
 import Admin from './pages/Admin/Admin';
+import "bootstrap/dist/css/bootstrap.min.css";
 
-import {
-  BrowserRouter as Router,
-  
-} from "react-router-dom"
 
 function App() {
   
 
   return <>
- <Router>
+ 
   <Admin/>
       
-</Router>
+
  </>
 }
 

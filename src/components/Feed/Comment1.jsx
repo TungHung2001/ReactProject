@@ -8,7 +8,7 @@ const Main = styled.div`
   flex-direction: column;
 `
 const Section = styled.section`
-  padding: 30px 60px;
+  padding: 5px 60px;
   width: 80%;
   overflow: scroll;
   display: flex;
@@ -21,7 +21,7 @@ const H3 = styled.h3`
 `
 const Com = styled.div`
   display: flex;
-  padding: 20px 10px;
+  padding: 10px; //trbl
   overflow: auto;
 `
 const P = styled.p`
@@ -37,7 +37,7 @@ const InputContainer = styled.div`
   display: flex;
   justify-content: center;
   width: 80%;
-  padding: 30px 60px;
+  padding: 0px 60px;
 `
 const Input = styled.input`
   width: 100%;
