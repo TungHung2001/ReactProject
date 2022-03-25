@@ -1,9 +1,11 @@
 import React, { useState } from "react"
 import FormInput from "./FormInput"
 import styled from "styled-components"
-import Selection from "./Selection"
-import ChoosePic from "./ChoosePic"
-
+import Box from "@mui/material/Box"
+import InputLabel from "@mui/material/InputLabel"
+import MenuItem from "@mui/material/MenuItem"
+import FormControl from "@mui/material/FormControl"
+import Select from "@mui/material/Select"
 const FormLog = styled.div`
   display: flex;
   align-items: center;
@@ -35,13 +37,31 @@ const H1 = styled.h1`
   color: #1775ee;
   text-align: center;
 `
+const Pic = styled.div`
+  background-color: white;
+  border-radius: 10px;
+`
+const InputPic = styled.input`
+  display: flex;
+
+  width: 100%;
+`
+const Sec = styled.div`
+  background-color: white;
+  border-radius: 10px;
+`
 const LoginForm = () => {
+  const [Role, setRole] = React.useState("")
+
+  const handleChange = (event) => {
+    setRole(event.target.value)
+  }
   const [values, setValues] = useState({
     username: "",
     name: "",
     email: "",
     password: "",
-    confirmPassword: "",
+    confirmPassword: "", //add thuoc tinh o day
   })
 
   const inputs = [
@@ -124,14 +144,31 @@ const LoginForm = () => {
             />
           ))}
 
-          {/* <select name="" id="">
-            <option value=""></option>
-            <option value=""></option>
-            <option value=""></option>
-          </select> */}
-          <Selection />
+          <Sec>
+            <Box sx={{ minWidth: 120 }}>
+              <FormControl fullWidth>
+                <InputLabel id="">Role</InputLabel>
+                <Select
+                  labelId=""
+                  id=""
+                  value={Role}
+                  label="Role"
+                  onChange={handleChange}
+                >
+                  <MenuItem value={0}>Manager</MenuItem>
+                  <MenuItem value={1}>Admin</MenuItem>
+                  <MenuItem value={2}>Staff</MenuItem>
+                  <MenuItem value={3}>Staff</MenuItem>
+                  {/* Chon role */}
+                </Select>
+              </FormControl>
+            </Box>
+          </Sec>
 
-          <ChoosePic />
+          <Pic>
+            <InputPic id="fileInput" type="file" />
+            {/* Add file anh o day */}
+          </Pic>
 
           <Button>Submit</Button>
         </Form>
