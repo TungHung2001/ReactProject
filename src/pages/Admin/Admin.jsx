@@ -1,7 +1,7 @@
 import React from "react"
 
 import Sidebar from "../../components/SideBar/Sidebar"
-import { Routes, Route, Navigate } from "react-router-dom"
+import { Routes, Route } from "react-router-dom"
 
 import HomeAd from "./HomeAd"
 import Register from "../../components/Register/Register"

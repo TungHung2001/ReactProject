@@ -5,7 +5,7 @@ import MoreVertRoundedIcon from "@mui/icons-material/MoreVertRounded"
 import { Users } from "../../TestPeopleData"
 
 import { Link } from "react-router-dom"
-import PostPdf from "../Idea-PDF/PostPdf"
+
 import Like from "../Like/Like"
 import Comment12 from "./Comment1"
 const Main = styled.div`
