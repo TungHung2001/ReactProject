@@ -50,6 +50,8 @@ const Sec = styled.div`
   background-color: white;
   border-radius: 10px;
 `
+
+
 const LoginForm = () => {
   const [Role, setRole] = React.useState("")
 
@@ -107,7 +109,7 @@ const LoginForm = () => {
       errorMessage:
         "Password should be 8-20 characters and include at least 1 letter, 1 number and 1 special character!",
       label: "Password",
-      pattern: `^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$`,
+      // pattern: `^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$`,
       required: true,
     },
     {
@@ -123,7 +125,8 @@ const LoginForm = () => {
   ]
 
   const handleSubmit = (e) => {
-    e.preventDefault()
+    e.preventDefault();
+    alert('submit form successfuly!!!')
   }
 
   const onChange = (e) => {
@@ -164,12 +167,6 @@ const LoginForm = () => {
               </FormControl>
             </Box>
           </Sec>
-
-          <Pic>
-            <InputPic id="fileInput" type="file" />
-            {/* Add file anh o day */}
-          </Pic>
-
           <Button>Submit</Button>
         </Form>
       </FormLog>

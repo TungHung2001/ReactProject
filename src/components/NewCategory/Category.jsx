@@ -75,7 +75,7 @@ const Category = () => {
             Submit
           </Button>
         </Form>
-        <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+        <Snackbar open={open} autoHideDuration={1000} onClose={handleClose}>
           <Alert
             onClose={handleClose}
             severity="success"
