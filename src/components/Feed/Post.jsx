@@ -14,6 +14,7 @@ const Main = styled.div`
   -webkit-box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
   box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
   margin: 30px 0;
+  overflow: auto;
 `
 const Wrapper = styled.div`
   padding: 10px;
@@ -77,8 +78,12 @@ const LinkLabel = styled.button`
   color: white;
   font-weight: bold;
   font-size: 13px;
-  background-color: #0427ee;
+  background-color: #1e88e5;
   border: none;
+  border-radius: 10px;
+  :hover {
+    background-color: #1a237e;
+  }
 `
 
 const Post = ({ post }) => {

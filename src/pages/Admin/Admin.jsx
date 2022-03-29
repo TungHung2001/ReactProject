@@ -15,6 +15,7 @@ import Test from "../Test"
 import SetDate from "./Date/SetDate"
 import DateLine from "./Date/DateLine"
 import Profile from "../Profile"
+import Dashboard from "../../components/DashBoard/Dashboard"
 //import ViewPdf from "../../components/Idea/ViewPdf"
 
 const Admin = () => {
@@ -23,7 +24,7 @@ const Admin = () => {
       <Sidebar />
 
       <Routes>
-        <Route path="/" element={<HomeAd />} />
+        <Route path="/" element={<Login />} />
         <Route path="/Login" element={<Login />} />
         <Route path="/Home" element={<HomeAd />} />
         <Route path="/Loginin" element={<Register />} />
@@ -37,7 +38,7 @@ const Admin = () => {
         <Route path="/Date" element={<DateLine />} />
         <Route path="/test" element={<Test />} />
         <Route path="/profile" element={<Profile />} />
-        {/* <Navigate to={<ShowPdf />} /> */}
+        <Route path="/DashBoard" element={<Dashboard />} />
       </Routes>
     </React.Fragment>
   )

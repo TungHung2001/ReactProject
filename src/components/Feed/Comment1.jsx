@@ -42,7 +42,7 @@ const InputContainer = styled.div`
 const Input = styled.input`
   width: 100%;
   height: 35px;
-  border: none;
+
   border-radius: 10px;
 `
 const Button = styled.button`
@@ -58,11 +58,14 @@ const Button = styled.button`
 const LoadM = styled.button`
   border: none;
   border-radius: 10px;
-  background-color: #22b3c9;
+  background-color: #eeeeee;
   font-size: 12px;
   font-weight: 10px;
-  width: 80%;
+  width: 100%;
   height: 20px;
+  :hover {
+    background-color: #9e9e9e;
+  }
 `
 const Comment1 = () => {
   const [noOfElement, setnoElement] = useState(1)

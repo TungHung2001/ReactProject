@@ -4,14 +4,15 @@ import Feed from "../../components/Feed/Feed"
 
 const Main = styled.div`
   display: flex;
-  width: 100%;
 `
 const Left = styled.div`
-  flex: 1;
+  flex: 3.5;
+  display: flex;
   width: 100%;
 `
 const Right = styled.div`
-  flex: 1;
+  flex: 3.5;
+  display: flex;
   width: 100%;
 `
 const HomeAd = () => {

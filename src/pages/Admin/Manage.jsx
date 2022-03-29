@@ -187,7 +187,7 @@ export default function StickyHeadTable() {
                     <Button
                       variant="outlined"
                       startIcon={<DeleteIcon />}
-                      sx={{ color: "red" }}
+                      sx={{ color: "white", backgroundColor: "#f44336" }}
                     >
                       Delete
                     </Button>
@@ -195,7 +195,7 @@ export default function StickyHeadTable() {
                     <Button
                       variant="outlined"
                       startIcon={<EditIcon />}
-                      sx={{ color: "blue" }}
+                      sx={{ color: "white", backgroundColor: "#304ffe" }}
                     >
                       Edit
                     </Button>

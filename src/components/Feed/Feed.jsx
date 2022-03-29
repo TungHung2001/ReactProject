@@ -4,7 +4,7 @@ import Post from "./Post"
 import { Posts } from "../../TestPeopleData"
 
 const Main = styled.div`
-  flex: 6;
+  flex: 4;
   height: calc(100vh - 50px);
 `
 const Warrper = styled.div``

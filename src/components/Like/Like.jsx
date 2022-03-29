@@ -4,18 +4,17 @@ import "./Like.css"
 
 import ThumbUpOffAltSharpIcon from "@mui/icons-material/ThumbUpOffAltSharp"
 import ThumbDownSharpIcon from "@mui/icons-material/ThumbDownSharp"
-import { red } from "@mui/material/colors"
+
 const Main = styled.div`
   display: flex;
   flex-direction: column;
 `
 const Button = styled.button`
-  width: 100px;
-  height: 32px;
-
   margin: 5px;
   border: none;
-  border-radius: 10px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
   :hover {
     background-color: #9e9e9e;
   }
