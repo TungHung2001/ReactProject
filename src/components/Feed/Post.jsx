@@ -30,12 +30,7 @@ const Ava = styled.img`
   border-radius: 50%;
   object-fit: cover;
 `
-const PostImg = styled.div`
-  margin-top: 20px;
-  width: 100%;
-  max-height: 500px;
-  object-fit: contain;
-`
+
 const PTL = styled.div`
   display: flex;
   align-items: center;
@@ -85,7 +80,11 @@ const LinkLabel = styled.button`
     background-color: #1a237e;
   }
 `
-
+const Title = styled.span`
+  overflow: auto;
+  display: flex;
+  font-size: 18px;
+`
 const Post = ({ post }) => {
   return (
     <Main>
@@ -104,10 +103,10 @@ const Post = ({ post }) => {
           <MoreVertRoundedIcon />
         </PostTop>
         <PostCenter>
+          <Title>NEW POST</Title>
+          {/* title */}
           <PText>{post?.desc}</PText>
-          <PostImg>{/* <PostPdf /> */}</PostImg>
-
-          {/* {post.photo} */}
+          {/* Description */}
         </PostCenter>
         <PostBottom>
           <PBL>

@@ -21,6 +21,10 @@ const Link1 = styled(Link)`
   align-items: center;
   justify-content: center;
 `
+const ButtonMain = styled.div`
+  display: flex;
+  justify-content: flex-end;
+`
 const columns = [
   { id: "category", label: "Category", minWidth: 50 },
   { id: "slug", label: "Slug", minWidth: 50 },
@@ -84,21 +88,23 @@ export default function StickyHeadTable() {
                         </TableCell>
                       )
                     })}
-                    <Button
-                      variant="contained"
-                      startIcon={<DeleteIcon />}
-                      sx={{ color: "white", backgroundColor: "#f44336" }}
-                    >
-                      Delete
-                    </Button>
+                    <ButtonMain>
+                      <Button
+                        variant="contained"
+                        startIcon={<DeleteIcon />}
+                        sx={{ color: "white", backgroundColor: "#f44336" }}
+                      >
+                        Delete
+                      </Button>
 
-                    <Button
-                      variant="contained"
-                      startIcon={<EditIcon />}
-                      sx={{ color: "white", backgroundColor: "#304ffe" }}
-                    >
-                      Edit
-                    </Button>
+                      <Button
+                        variant="contained"
+                        startIcon={<EditIcon />}
+                        sx={{ color: "white", backgroundColor: "#304ffe" }}
+                      >
+                        Edit
+                      </Button>
+                    </ButtonMain>
                   </TableRow>
                 )
               })}

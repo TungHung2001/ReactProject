@@ -6,10 +6,11 @@ const Main = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  width: 100%;
 `
 const Section = styled.section`
-  padding: 5px 60px;
-  width: 80%;
+  padding: 5px 5px;
+  width: 100%;
   overflow: scroll;
   display: flex;
   flex-direction: column;
@@ -36,17 +37,16 @@ const Img = styled.img`
 const InputContainer = styled.div`
   display: flex;
   justify-content: center;
-  width: 80%;
-  padding: 0px 60px;
+  width: 100%;
+  padding: 0px 5px;
 `
 const Input = styled.input`
   width: 100%;
   height: 35px;
-
   border-radius: 10px;
 `
 const Button = styled.button`
-  width: 200px;
+  width: 130px;
   border: none;
   border-radius: 10px;
   font-weight: bold;

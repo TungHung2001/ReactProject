@@ -37,7 +37,7 @@ const Dashboard = () => {
       </MainBox>
       <MainChart>
         <Chart1>
-          <H1>Ideas</H1>
+          <H1>Ideas Submmited</H1>
 
           <AreaChart
             width={900}

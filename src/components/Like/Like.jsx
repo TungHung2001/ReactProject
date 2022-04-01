@@ -7,29 +7,30 @@ import ThumbDownSharpIcon from "@mui/icons-material/ThumbDownSharp"
 
 const Main = styled.div`
   display: flex;
-  flex-direction: column;
 `
 const Button = styled.button`
+  display: flex;
   margin: 5px;
   border: none;
   width: 32px;
   height: 32px;
+  align-items: center;
+  justify-content: center;
   border-radius: 50%;
   :hover {
     background-color: #9e9e9e;
   }
 `
 const P = styled.p`
-  margin: 5px;
+  margin: 8px 5px 5px 0px; //tlbr
   font-size: 20px;
-`
-const Num = styled.div`
   display: flex;
 `
-const Icon = styled.div`
-  margin: 5px;
+
+const Blike = styled.div`
+  display: flex;
+  flex-direction: row;
 `
-const Blike = styled.div``
 const Like = () => {
   const [like, setlike] = useState(100) // add like
   const [dislike, setdislike] = useState(100) // add dislike
@@ -68,38 +69,21 @@ const Like = () => {
   return (
     <>
       <Main>
-        <Num>
-          <Icon>
-            <ThumbUpOffAltSharpIcon
-              className="ThumpUp"
-              fontSize="medium"
-              variant="contained"
-            />{" "}
-          </Icon>
-          <P>{like}</P>
-          <Icon>
-            <ThumbDownSharpIcon
-              className="ThumpDown"
-              fontSize="medium"
-              variant="contained"
-            />{" "}
-          </Icon>
-          <P>{dislike}</P>
-        </Num>
         <Blike>
           <Button
             className={[likeactive ? "active-like " : null].join("")}
             onClick={likef}
           >
             <ThumbUpOffAltSharpIcon />
-          </Button>
-
+          </Button>{" "}
+          <P>{like}</P>
           <Button
             className={[dislikeactive ? "active-dislike " : null].join("")}
             onClick={dislikef}
           >
             <ThumbDownSharpIcon />
-          </Button>
+          </Button>{" "}
+          <P>{dislike}</P>
         </Blike>
       </Main>
     </>
