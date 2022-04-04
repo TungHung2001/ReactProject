@@ -1,11 +1,11 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 import styled from "styled-components"
 
 import MoreVertRoundedIcon from "@mui/icons-material/MoreVertRounded"
 import { Users } from "../../TestPeopleData"
 
 import { Link } from "react-router-dom"
-
+import axios from "axios"
 import Like from "../Like/Like"
 import Comment12 from "./Comment1"
 const Main = styled.div`
@@ -85,29 +85,45 @@ const Title = styled.span`
   display: flex;
   font-size: 18px;
 `
-const Post = ({ post }) => {
-  return (
-    <Main>
+
+const Post = () => {
+  const [IdeaList, setIdeaList] = useState([]);
+
+  useEffect(()=>{
+  axios.get("http://localhost:3001/idea").then((response)=>{
+    setIdeaList(response.data);
+  });
+},[])
+
+ 
+ return(
+      <>  
+    {IdeaList.map((val,key)=>{
+      return(
+        <>
+    <Main key = {key}>
       <Wrapper>
         <PostTop>
           <PTL>
             <Ava
-              src={Users.filter((u) => u.id === post.userId)[0].profilePicture}
+             src="https://scontent.fhan2-4.fna.fbcdn.net/v/t1.6435-9/86667283_2601274866758819_7090944401005871104_n.jpg?_nc_cat=104&ccb=1-5&_nc_sid=174925&_nc_ohc=WRyTFpQqA1gAX_Lkgr7&_nc_ht=scontent.fhan2-4.fna&oh=00_AT-k7uNvAMugeJaGIpBBF-Vh2NaGVteGvC2tfkOnfEsfJQ&oe=626E2006"
             ></Ava>
             <PUserName>
-              {Users.filter((u) => u.id === post.userId)[0].username}
+              Anonymous
             </PUserName>
-            <PDate>{post.date}</PDate>
+            <PDate></PDate>
           </PTL>
           <PTR></PTR>
           <MoreVertRoundedIcon />
         </PostTop>
-        <PostCenter>
-          <Title>NEW POST</Title>
+        
+          <PostCenter>
+          <Title>{val.Title}</Title>
           {/* title */}
-          <PText>{post?.desc}</PText>
+          <PText>{val.Description}</PText>
           {/* Description */}
-        </PostCenter>
+        </PostCenter> 
+        
         <PostBottom>
           <PBL>
             <IconLike>
@@ -123,9 +139,14 @@ const Post = ({ post }) => {
           </PBR>
         </PostBottom>
         <Comment12 />
+      
       </Wrapper>
-    </Main>
-  )
-}
+    </Main> 
+    </>
+    )
+    })}
+    </>
+ )
+} 
 
 export default Post

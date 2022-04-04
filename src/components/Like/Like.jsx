@@ -1,6 +1,7 @@
-import React, { useState } from "react"
+import React, { useState,useEffect } from "react"
 import styled from "styled-components"
 import "./Like.css"
+import axios from "axios"
 
 import ThumbUpOffAltSharpIcon from "@mui/icons-material/ThumbUpOffAltSharp"
 import ThumbDownSharpIcon from "@mui/icons-material/ThumbDownSharp"
@@ -32,12 +33,23 @@ const Blike = styled.div`
   flex-direction: row;
 `
 const Like = () => {
-  const [like, setlike] = useState(100) // add like
-  const [dislike, setdislike] = useState(100) // add dislike
+  const [like, setlike] = useState() // add like
+  const [dislike, setdislike] = useState() // add dislike
 
   const [likeactive, setlikeactive] = useState(false)
   const [dislikeactive, setdislikeactive] = useState(false)
-
+  const [IdeaList, setIdeaList] = useState([]);
+  const  handleSubmit  = (e) => {
+    axios.post("http://localhost:3001/insert", {
+      Like: like
+    });  
+  }
+  useEffect(()=>{
+    axios.get("http://localhost:3001/idea").then((response)=>{
+      setIdeaList(response.data);
+      setlike(response.like)
+    });
+  },[])
   function likef() {
     if (likeactive) {
       setlikeactive(false)
@@ -51,7 +63,8 @@ const Like = () => {
         setdislike(dislike - 1)
       }
     }
-  }
+  };
+
   function dislikef() {
     if (dislikeactive) {
       setdislikeactive(false)
@@ -68,6 +81,7 @@ const Like = () => {
   }
   return (
     <>
+
       <Main>
         <Blike>
           <Button
@@ -86,8 +100,10 @@ const Like = () => {
           <P>{dislike}</P>
         </Blike>
       </Main>
-    </>
-  )
-}
+      </>
+    )
+
+
+  }
 
 export default Like

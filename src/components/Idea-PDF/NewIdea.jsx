@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState,useEffect } from "react"
 import * as React from "react"
 import Checkbox from "@mui/material/Checkbox"
 import Snackbar from "@mui/material/Snackbar"
@@ -10,6 +10,7 @@ import "@react-pdf-viewer/core/lib/styles/index.css"
 import { defaultLayoutPlugin } from "@react-pdf-viewer/default-layout"
 import "@react-pdf-viewer/default-layout/lib/styles/index.css"
 import styled from "styled-components"
+import axios from "axios"
 
 const Main = styled.div`
   display: flex;
@@ -58,9 +59,28 @@ const Label = styled.label`
   color: gray;
 `
 const Addpdf = () => {
-  const { handleSubmit } = useForm()
-  const onSubmit = (e) => {
-    console.log(e)
+
+  const [Title, setTitle] = useState()
+  const [Description, setDescription] = useState()
+  const [IdeaList, setIdeaList] = useState([]);
+  const  handleSubmit  = (e) => {
+    axios.post("http://localhost:3001/insert", {
+      Title: Title,
+      Description: Description
+    });  
+  }
+  useEffect(()=>{
+    axios.get("http://localhost:3001/idea").then((response)=>{
+      setIdeaList(response.data);
+    });
+  },[])
+
+  const changetile = (e)=>{
+    setTitle(e.target.value);
+  }
+
+  const changedes = (e)=>{
+    setDescription(e.target.value);
   }
   const [isDisabled, setIsDisabled] = useState(true)
   const [checked, setChecked] = useState(false)
@@ -120,12 +140,12 @@ const Addpdf = () => {
     <>
       <Main>
         {/* Upload PDF */}
-        <Form onSubmit={handleSubmit(onSubmit)}>
+        <Form onSubmit={handleSubmit}>
           <H2>New Idea</H2>
           <Label>Title</Label>
-          <Input placeholder="Title" type="text" />
+          <Input placeholder="Title" type="text" onChange={changetile} />
           <Label>Description</Label>
-          <Input placeholder="Description" type="text" />
+          <Input placeholder="Description" type="text" onChange={changedes}/>
 
           <Input type="file" className="form-control" onChange={handleFile} />
 
@@ -173,6 +193,14 @@ const Addpdf = () => {
         {/* render this if we have pdfFile state null   */}
         {!pdfFile && <>No file is selected yet</>}
       </Pdf>
+        {IdeaList.map((val,key)=>{
+          return(
+            <>
+            <h1>{val.Title}</h1>
+            <h1>{val.Description}</h1>
+            </>
+          )
+        })}
     </>
   )
 }

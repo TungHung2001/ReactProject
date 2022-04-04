@@ -6,6 +6,7 @@ import InputLabel from "@mui/material/InputLabel"
 import MenuItem from "@mui/material/MenuItem"
 import FormControl from "@mui/material/FormControl"
 import Select from "@mui/material/Select"
+import axios from "axios"
 const FormLog = styled.div`
   display: flex;
   align-items: center;
@@ -53,23 +54,43 @@ const Sec = styled.div`
 
 
 const LoginForm = () => {
-  const [Role, setRole] = React.useState("")
+  const [Role, setRole] = useState("")
+  const [Username, setUsername] = useState("")
+  const [Yourname, setYourname] = useState("")
+  const [Email, setEmail] = useState("")
+  const [Password, setPassword] = useState("")
+
+  const addToList = (e)=>{
+    axios.post("http://localhost:3001/register", 
+    {
+      Username: Username,
+      Yourname: Yourname,
+      Email: Email,
+      Password: Password,
+      Role: Role
+    });
+    if (e){
+      alert('submit form successfuly!!!')
+    }else{
+      alert('submit failure!!!')
+    }
+  }
 
   const handleChange = (event) => {
     setRole(event.target.value)
   }
   const [values, setValues] = useState({
-    username: "",
-    name: "",
-    email: "",
-    password: "",
-    confirmPassword: "", //add thuoc tinh o day
+    Username: "",
+    Yourname: "",
+    Email: "",
+    Password: "",
+    ConfirmPassword: "", //add thuoc tinh o day
   })
 
   const inputs = [
     {
       id: 1,
-      name: "username",
+      name: "Username",
       type: "text",
       placeholder: "Username",
       errorMessage:
@@ -81,7 +102,7 @@ const LoginForm = () => {
 
     {
       id: 2,
-      name: "name",
+      name: "Yourname",
       type: "text",
       placeholder: "Your name",
       errorMessage:
@@ -93,7 +114,7 @@ const LoginForm = () => {
 
     {
       id: 3,
-      name: "email",
+      name: "Email",
       type: "email",
       placeholder: "Email",
       errorMessage: "It should be a valid email address!",
@@ -103,7 +124,7 @@ const LoginForm = () => {
 
     {
       id: 4,
-      name: "password",
+      name: "Password",
       type: "password",
       placeholder: "Password",
       errorMessage:
@@ -114,7 +135,7 @@ const LoginForm = () => {
     },
     {
       id: 5,
-      name: "confirmPassword",
+      name: "ConfirmPassword",
       type: "password",
       placeholder: "Confirm Password",
       errorMessage: "Passwords don't match!",
@@ -124,19 +145,18 @@ const LoginForm = () => {
     },
   ]
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    alert('submit form successfuly!!!')
-  }
-
-  const onChange = (e) => {
+  const onChange = e => {
     setValues({ ...values, [e.target.name]: e.target.value })
+    if (e.target.name === 'Username') setUsername(e.target.value);
+    else if (e.target.name === 'Yourname') setYourname(e.target.value);
+    else if (e.target.name === 'Email') setEmail(e.target.value);
+    else if (e.target.name === 'Password') setPassword(e.target.value);
   }
 
   return (
     <React.Fragment>
       <FormLog>
-        <Form onSubmit={handleSubmit}>
+        <Form onSubmit={addToList}>
           <H1>Register</H1>
           {inputs.map((input) => (
             <FormInput
