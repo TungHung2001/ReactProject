@@ -6,7 +6,6 @@ import MoreVertRoundedIcon from "@mui/icons-material/MoreVertRounded"
 import { Link } from "react-router-dom"
 import axios from "axios"
 
-import Comment12 from "./Comment1"
 import ThumbUpOffAltSharpIcon from "@mui/icons-material/ThumbUpOffAltSharp"
 import ThumbDownSharpIcon from "@mui/icons-material/ThumbDownSharp"
 import "./Like.css"
@@ -134,6 +133,73 @@ const Blike = styled.div`
   display: flex;
   flex-direction: row;
 `
+const MainCom = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+`
+const SectionCom = styled.section`
+  padding: 5px 5px;
+  width: 100%;
+  overflow: scroll;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex-direction: column;
+  height: 250px;
+`
+const H3Com = styled.h3`
+  padding: 10px;
+  @media only screen and (max-width: 380px) {
+    font-size: 16px;
+  }
+`
+const Com = styled.div`
+  display: flex;
+  padding: 10px; //trbl
+`
+const PCom = styled.p`
+  padding: 10px;
+  @media only screen and (max-width: 380px) {
+    font-size: 15px;
+  }
+`
+const ImgCom = styled.img`
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  @media only screen and (max-width: 380px) {
+    height: 32px;
+    width: 32px;
+  }
+`
+const InputContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding: 0px 5px;
+`
+const InputCom = styled.input`
+  width: 100%;
+  height: 35px;
+  border-radius: 10px;
+  @media only screen and (max-width: 380px) {
+    height: 20px;
+  }
+`
+const ButtonCom = styled.button`
+  width: 130px;
+  border: none;
+  border-radius: 10px;
+  font-weight: bold;
+  font-size: 15px;
+  color: white;
+  background-color: #1775ee;
+  margin: 10px;
+`
 const Post = () => {
   // const [Like, setlike] = useState(1) // add like
   // const [Dislike, setdislike] = useState(1) // add dislike
@@ -141,51 +207,50 @@ const Post = () => {
   const [likeactive, setlikeactive] = useState(false)
   const [dislikeactive, setdislikeactive] = useState(false)
 
-  const btnlike = (id)=>{  
+  const btnlike = (id) => {
     if (likeactive) {
       setlikeactive(false)
-      axios.put("http://localhost:3001/likef",{
-      id:id
-    })
+      axios.put("http://localhost:3001/likef", {
+        id: id,
+      })
     } else {
       setlikeactive(true)
-      axios.put("http://localhost:3001/like",{
-      id:id
-    })
-    if (dislikeactive) {
-      setdislikeactive(false)
-      axios.put("http://localhost:3001/dislikef",{
-      id:id
+      axios.put("http://localhost:3001/like", {
+        id: id,
       })
-      axios.put("http://localhost:3001/like",{
-      id:id
-    })
+      if (dislikeactive) {
+        setdislikeactive(false)
+        axios.put("http://localhost:3001/dislikef", {
+          id: id,
+        })
+        axios.put("http://localhost:3001/like", {
+          id: id,
+        })
+      }
     }
-  }  
   }
-  const btndislike = (id)=>{  
+  const btndislike = (id) => {
     if (dislikeactive) {
       setdislikeactive(false)
-      axios.put("http://localhost:3001/dislikef",{
-      id:id
-    })
+      axios.put("http://localhost:3001/dislikef", {
+        id: id,
+      })
     } else {
       setdislikeactive(true)
-      axios.put("http://localhost:3001/dislike",{
-      id:id
-    })
-    if (likeactive) {
-      setlikeactive(false)
-      axios.put("http://localhost:3001/likef",{
-      id:id
+      axios.put("http://localhost:3001/dislike", {
+        id: id,
       })
-      axios.put("http://localhost:3001/dislike",{
-      id:id
-    })
+      if (likeactive) {
+        setlikeactive(false)
+        axios.put("http://localhost:3001/likef", {
+          id: id,
+        })
+        axios.put("http://localhost:3001/dislike", {
+          id: id,
+        })
+      }
     }
-  }  
   }
-
 
   // function dislikef() {
   //   if (dislikeactive) {
@@ -243,7 +308,7 @@ const Post = () => {
                             className={[
                               likeactive ? "active-like " : null,
                             ].join("")}
-                            onClick={()=>btnlike(val._id)}
+                            onClick={() => btnlike(val._id)}
                           >
                             <ThumbUpOffAltSharpIcon />
                           </ButtonLike>{" "}
@@ -252,7 +317,7 @@ const Post = () => {
                             className={[
                               dislikeactive ? "active-dislike " : null,
                             ].join("")}
-                            onClick={()=>btndislike(val._id)}
+                            onClick={() => btndislike(val._id)}
                           >
                             <ThumbDownSharpIcon />
                           </ButtonLike>{" "}
@@ -269,7 +334,22 @@ const Post = () => {
                     </PDF>
                   </PBR>
                 </PostBottom>
-                <Comment12 />
+                <MainCom>
+                  {" "}
+                  <InputContainer>
+                    <InputCom />
+                    <ButtonCom type="submit">send</ButtonCom>
+                  </InputContainer>
+                  <SectionCom>
+                    <>
+                      <Com>
+                        <ImgCom />
+                        <H3Com>NOT LAn</H3Com>
+                        <PCom>EeEEEEEEEEEE</PCom>
+                      </Com>
+                    </>
+                  </SectionCom>
+                </MainCom>
               </Wrapper>
             </Main>
           </>
