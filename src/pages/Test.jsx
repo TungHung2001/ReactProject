@@ -1,10 +1,13 @@
-import React from "react"
+import * as React from "react"
+import Alert from "@mui/material/Alert"
 import Box from "@mui/material/Box"
 import InputLabel from "@mui/material/InputLabel"
 import MenuItem from "@mui/material/MenuItem"
 import FormControl from "@mui/material/FormControl"
 import Select from "@mui/material/Select"
 import styled from "styled-components"
+import { isEmail } from "validator"
+import Snackbar from "@mui/material/Snackbar"
 const FormLog = styled.div`
   display: flex;
   align-items: center;
@@ -50,13 +53,40 @@ const Test = () => {
   const required = (value) => {
     if (!value) {
       return (
-        <div className="alert alert-danger" role="alert">
+        <Alert variant="filled" severity="error">
           This field is required!
-        </div>
+        </Alert>
       )
     }
   }
-  
+  const validEmail = (value) => {
+    if (!isEmail(value)) {
+      return (
+        <Alert variant="filled" severity="error">
+          valid email!!!
+        </Alert>
+      )
+    }
+  }
+  const vusername = (value) => {
+    if (value.length < 3 || value.length > 20) {
+      return (
+        <Alert variant="filled" severity="error">
+          The username must be between 3 and 20 characters.
+        </Alert>
+      )
+    }
+  }
+  const vpassword = (value) => {
+    if (value.length < 6 || value.length > 40) {
+      return (
+        <Alert variant="filled" severity="error">
+          The password must be between 6 and 40 characters.
+        </Alert>
+      )
+    }
+  }
+
   const [Role, setRole] = React.useState("")
 
   const handleChange = (event) => {
@@ -64,6 +94,19 @@ const Test = () => {
   }
   const handleSubmit = (e) => {
     e.preventDefault()
+  }
+  const [open, setOpen] = React.useState(false)
+
+  const handleClick = () => {
+    setOpen(true)
+  }
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return
+    }
+
+    setOpen(false)
   }
   return (
     <>
@@ -75,7 +118,7 @@ const Test = () => {
             type="text"
             className="form-control"
             name="username"
-            validations={[required]}
+            validations={[vusername]}
           />
           <Label htmlFor="Username">YourName</Label>
           <Input
@@ -89,14 +132,14 @@ const Test = () => {
             type="text"
             className="form-control"
             name="Email"
-            validations={[required]}
+            validations={[validEmail]}
           />
           <Label htmlFor="Password<">Password</Label>
           <Input
             type="text"
             className="form-control"
             name="Password<"
-            validations={[required]}
+            validations={[vpassword]}
           />
           <Label htmlFor="ConfirmPassword">Confirm Password</Label>
           <Input
@@ -115,6 +158,7 @@ const Test = () => {
                   value={Role}
                   label="Role"
                   onChange={handleChange}
+                  validations={[required]}
                 >
                   <MenuItem value={0}>Manager</MenuItem>
                   <MenuItem value={1}>Admin</MenuItem>
@@ -125,10 +169,18 @@ const Test = () => {
               </FormControl>
             </Box>
           </Sec>
-          <Button>Submit</Button>
+          <Button onClick={handleClick}>Submit</Button>
+          <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+            <Alert
+              onClose={handleClose}
+              severity="success"
+              sx={{ width: "100%" }}
+            >
+              Register Success!!!
+            </Alert>
+          </Snackbar>
         </Form>
       </FormLog>
-      
     </>
   )
 }

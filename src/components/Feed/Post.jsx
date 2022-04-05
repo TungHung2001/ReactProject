@@ -17,9 +17,19 @@ const Main = styled.div`
   box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
   margin: 30px 0;
   overflow: auto;
+  @media only screen and (max-width: 380px) {
+    display: flex;
+    width: 35%;
+    overflow: none;
+    margin: 10px 0;
+  }
 `
 const Wrapper = styled.div`
   padding: 10px;
+  @media only screen and (max-width: 380px) {
+    width: 90%;
+    margin-left: 30px;
+  }
 `
 const PostTop = styled.div`
   display: flex;
@@ -31,11 +41,15 @@ const Ava = styled.img`
   height: 32px;
   border-radius: 50%;
   object-fit: cover;
+  @media only screen and (max-width: 380px) {
+  }
 `
 
 const PTL = styled.div`
   display: flex;
   align-items: center;
+  @media only screen and (max-width: 380px) {
+  }
 `
 const PTR = styled.div``
 const PUserName = styled.span`
@@ -49,6 +63,9 @@ const PDate = styled.span`
 const PText = styled.span`
   overflow: auto;
   display: flex;
+  @media only screen and (max-width: 380px) {
+    overflow: hidden;
+  }
 `
 const PostCenter = styled.div`
   margin: 20px 0;
@@ -80,6 +97,10 @@ const LinkLabel = styled.button`
   border-radius: 10px;
   :hover {
     background-color: #1a237e;
+  }
+  @media only screen and (max-width: 380px) {
+    width: 70px;
+    height: 30px;
   }
 `
 const Title = styled.span`
