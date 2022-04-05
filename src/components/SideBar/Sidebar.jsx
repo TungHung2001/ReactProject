@@ -176,6 +176,9 @@ const Sidebar = () => {
           <SidebarLink to="/test">
             <SidebarLabel>Test</SidebarLabel>
           </SidebarLink>
+          <SidebarLink to="/test1">
+            <SidebarLabel>Test1</SidebarLabel>
+          </SidebarLink>
         </SideBarWarp>
       </SidebarNav>
     </React.Fragment>

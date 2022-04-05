@@ -19,6 +19,9 @@ const Section = styled.section`
 `
 const H3 = styled.h3`
   padding: 10px;
+  @media only screen and (max-width: 380px) {
+    font-size: 16px;
+  }
 `
 const Com = styled.div`
   display: flex;
@@ -27,12 +30,19 @@ const Com = styled.div`
 `
 const P = styled.p`
   padding: 10px;
+  @media only screen and (max-width: 380px) {
+    font-size: 15px;
+  }
 `
 const Img = styled.img`
   width: 40px;
   height: 40px;
   border-radius: 50%;
   object-fit: cover;
+  @media only screen and (max-width: 380px) {
+    height: 32px;
+    width: 32px;
+  }
 `
 const InputContainer = styled.div`
   display: flex;
@@ -44,6 +54,9 @@ const Input = styled.input`
   width: 100%;
   height: 35px;
   border-radius: 10px;
+  @media only screen and (max-width: 380px) {
+    height: 20px;
+  }
 `
 const Button = styled.button`
   width: 130px;
