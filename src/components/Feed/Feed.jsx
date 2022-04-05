@@ -13,9 +13,9 @@ const Feed = () => {
     <>
       <Main>
         <Warrper>
-          {Posts.map((p) => (
-            <Post key={p.id} post={p} />
-          ))}
+          
+            <Post />
+
         </Warrper>
       </Main>
     </>

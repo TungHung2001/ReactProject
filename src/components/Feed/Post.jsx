@@ -114,37 +114,46 @@ const Blike = styled.div`
   flex-direction: row;
 `
 const Post = () => {
-  const [like, setlike] = useState(100) // add like
-  const [dislike, setdislike] = useState(100) // add dislike
+  const [Like, setlike] = useState(1) // add like
+  const [Dislike, setdislike] = useState(1) // add dislike
 
   const [likeactive, setlikeactive] = useState(false)
   const [dislikeactive, setdislikeactive] = useState(false)
 
-  function likef() {
-    if (likeactive) {
-      setlikeactive(false)
-      setlike(like - 1)
-    } else {
-      setlikeactive(true)
-      setlike(like + 1)
-      if (dislikeactive) {
-        setdislikeactive(false)
-        setlike(like + 1)
-        setdislike(dislike - 1)
-      }
-    }
+  const btnlike = (id)=>{
+    axios.put("http://localhost:3001/like",{
+      id:id,
+      Like:Like+1,
+    })
   }
+
+  // function likef(id) {
+  //   if (likeactive) {
+  //     setlikeactive(false)
+      
+  //     setlike(like - 1)
+  //   } else {
+  //     setlikeactive(true)
+  //     setlike(like + 1)
+  //     if (dislikeactive) {
+  //       setdislikeactive(false)
+  //       setlike(like + 1)
+  //       setdislike(dislike - 1)
+  //     }
+  //   }
+  // }
+
   function dislikef() {
     if (dislikeactive) {
       setdislikeactive(false)
-      setdislike(dislike - 1)
+      setdislike(Dislike - 1)
     } else {
       setdislikeactive(true)
-      setdislike(like + 1)
+      setdislike(Like + 1)
       if (likeactive) {
         setlikeactive(false)
-        setdislike(dislike + 1)
-        setlike(like - 1)
+        setdislike(Dislike + 1)
+        setlike(Like - 1)
       }
     }
   }
@@ -190,11 +199,11 @@ const Post = () => {
                             className={[
                               likeactive ? "active-like " : null,
                             ].join("")}
-                            onClick={likef}
+                            onClick={()=>btnlike(val._id)}
                           >
                             <ThumbUpOffAltSharpIcon />
                           </ButtonLike>{" "}
-                          <PLike>{like}</PLike>
+                          <PLike>{val.Like}</PLike>
                           <ButtonLike
                             className={[
                               dislikeactive ? "active-dislike " : null,
@@ -203,7 +212,7 @@ const Post = () => {
                           >
                             <ThumbDownSharpIcon />
                           </ButtonLike>{" "}
-                          <PLike>{dislike}</PLike>
+                          <PLike>{val.Dislike}</PLike>
                         </Blike>
                       </MainLike>
                     </IconLike>
