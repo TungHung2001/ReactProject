@@ -16,6 +16,7 @@ const Section = styled.section`
   flex-direction: column;
   justify-content: center;
   flex-direction: column;
+  height: 250px;
 `
 const H3 = styled.h3`
   padding: 10px;
@@ -26,7 +27,6 @@ const H3 = styled.h3`
 const Com = styled.div`
   display: flex;
   padding: 10px; //trbl
-  overflow: auto;
 `
 const P = styled.p`
   padding: 10px;
@@ -35,8 +35,8 @@ const P = styled.p`
   }
 `
 const Img = styled.img`
-  width: 40px;
-  height: 40px;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
   object-fit: cover;
   @media only screen and (max-width: 380px) {
@@ -81,16 +81,6 @@ const LoadM = styled.button`
   }
 `
 const Comment1 = () => {
-  const [noOfElement, setnoElement] = useState(1)
-  const loadMore = () => {
-    setnoElement(noOfElement + noOfElement + 1)
-  }
-  const Close = () => {
-    setnoElement(noOfElement - noOfElement + 1)
-  }
-
-  const slice = ComData.cdata.slice(0, noOfElement)
-
   return (
     <>
       <Main>
@@ -101,17 +91,46 @@ const Comment1 = () => {
         </InputContainer>
         <Section>
           <>
-            {slice.map((index) => {
-              return (
-                <Com key={index}>
-                  <Img />
-                  <H3>NOT LAn</H3>
-                  <P>EeEEEEEEEEEE</P>
-                </Com>
-              )
-            })}
-            <LoadM onClick={() => loadMore()}>Load More</LoadM>
-            <LoadM onClick={() => Close()}>Close</LoadM>
+            <Com>
+              <Img />
+              <H3>NOT LAn</H3>
+              <P>EeEEEEEEEEEE</P>
+            </Com>
+            <Com>
+              <Img />
+              <H3>NOT LAn</H3>
+              <P>EeEEEEEEEEEE</P>
+            </Com>
+            <Com>
+              <Img />
+              <H3>NOT LAn</H3>
+              <P>EeEEEEEEEEEE</P>
+            </Com>
+            <Com>
+              <Img />
+              <H3>NOT LAn</H3>
+              <P>EeEEEEEEEEEE</P>
+            </Com>
+            <Com>
+              <Img />
+              <H3>NOT LAn</H3>
+              <P>EeEEEEEEEEEE</P>
+            </Com>
+            <Com>
+              <Img />
+              <H3>NOT LAn</H3>
+              <P>EeEEEEEEEEEE</P>
+            </Com>{" "}
+            <Com>
+              <Img />
+              <H3>NOT LAn</H3>
+              <P>EeEEEEEEEEEE</P>
+            </Com>
+            <Com>
+              <Img />
+              <H3>NOT LAn</H3>
+              <P>EeEEEEEEEEEE</P>
+            </Com>
           </>
         </Section>
       </Main>
