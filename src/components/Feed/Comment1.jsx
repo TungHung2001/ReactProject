@@ -85,6 +85,9 @@ const Comment1 = () => {
   const loadMore = () => {
     setnoElement(noOfElement + noOfElement + 1)
   }
+  const Close = () => {
+    setnoElement(noOfElement - noOfElement + 1)
+  }
 
   const slice = ComData.cdata.slice(0, noOfElement)
 
@@ -98,16 +101,17 @@ const Comment1 = () => {
         </InputContainer>
         <Section>
           <>
-            {slice.map((item, index) => {
+            {slice.map((index) => {
               return (
                 <Com key={index}>
-                  <Img src="https://scontent.fhan2-2.fna.fbcdn.net/v/t39.30808-6/249333559_4524520644302729_8542170375727490088_n.jpg?_nc_cat=110&ccb=1-5&_nc_sid=8bfeb9&_nc_ohc=raFemxQOAwgAX94MIVK&_nc_ht=scontent.fhan2-2.fna&oh=00_AT8wXIHUPVIlw8XA5qCLgf9thDEj-lyxs9nugspaWHxJxA&oe=6250D2EA" />
-                  <H3>NOTBATMAN</H3>
-                  <P>{item.desc}</P>
+                  <Img />
+                  <H3>NOT LAn</H3>
+                  <P>EeEEEEEEEEEE</P>
                 </Com>
               )
             })}
             <LoadM onClick={() => loadMore()}>Load More</LoadM>
+            <LoadM onClick={() => Close()}>Close</LoadM>
           </>
         </Section>
       </Main>
