@@ -17,7 +17,7 @@ import DateLine from "./Date/DateLine"
 import Profile from "../Profile"
 import Dashboard from "../../components/DashBoard/Dashboard"
 //import ViewPdf from "../../components/Idea/ViewPdf"
-
+import Test1 from "../Test1"
 const Admin = () => {
   return (
     <React.Fragment>
@@ -39,6 +39,7 @@ const Admin = () => {
         <Route path="/test" element={<Test />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/DashBoard" element={<Dashboard />} />
+        <Route path="/test1" element={<Test1 />} />
       </Routes>
     </React.Fragment>
   )
