@@ -136,14 +136,14 @@ const Test = () => {
           />
           <Label htmlFor="Password<">Password</Label>
           <Input
-            type="text"
+            type="password"
             className="form-control"
             name="Password<"
             validations={[vpassword]}
           />
           <Label htmlFor="ConfirmPassword">Confirm Password</Label>
           <Input
-            type="text"
+            type="password"
             className="form-control"
             name="ConfirmPassword"
             validations={[required]}

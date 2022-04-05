@@ -135,49 +135,72 @@ const Blike = styled.div`
   flex-direction: row;
 `
 const Post = () => {
-  const [Like, setlike] = useState(1) // add like
-  const [Dislike, setdislike] = useState(1) // add dislike
+  // const [Like, setlike] = useState(1) // add like
+  // const [Dislike, setdislike] = useState(1) // add dislike
 
   const [likeactive, setlikeactive] = useState(false)
   const [dislikeactive, setdislikeactive] = useState(false)
 
-  const btnlike = (id)=>{
-    axios.put("http://localhost:3001/like",{
-      id:id,
-      Like:Like+1,
+  const btnlike = (id)=>{  
+    if (likeactive) {
+      setlikeactive(false)
+      axios.put("http://localhost:3001/likef",{
+      id:id
     })
+    } else {
+      setlikeactive(true)
+      axios.put("http://localhost:3001/like",{
+      id:id
+    })
+    if (dislikeactive) {
+      setdislikeactive(false)
+      axios.put("http://localhost:3001/dislikef",{
+      id:id
+      })
+      axios.put("http://localhost:3001/like",{
+      id:id
+    })
+    }
+  }  
+  }
+  const btndislike = (id)=>{  
+    if (dislikeactive) {
+      setdislikeactive(false)
+      axios.put("http://localhost:3001/dislikef",{
+      id:id
+    })
+    } else {
+      setdislikeactive(true)
+      axios.put("http://localhost:3001/dislike",{
+      id:id
+    })
+    if (likeactive) {
+      setlikeactive(false)
+      axios.put("http://localhost:3001/likef",{
+      id:id
+      })
+      axios.put("http://localhost:3001/dislike",{
+      id:id
+    })
+    }
+  }  
   }
 
-  // function likef(id) {
-  //   if (likeactive) {
-  //     setlikeactive(false)
-      
-  //     setlike(like - 1)
+
+  // function dislikef() {
+  //   if (dislikeactive) {
+  //     setdislikeactive(false)
+  //     setdislike(Dislike - 1)
   //   } else {
-  //     setlikeactive(true)
-  //     setlike(like + 1)
-  //     if (dislikeactive) {
-  //       setdislikeactive(false)
-  //       setlike(like + 1)
-  //       setdislike(dislike - 1)
+  //     setdislikeactive(true)
+  //     setdislike(Like + 1)
+  //     if (likeactive) {
+  //       setlikeactive(false)
+  //       setdislike(Dislike + 1)
+  //       setlike(Like - 1)
   //     }
   //   }
   // }
-
-  function dislikef() {
-    if (dislikeactive) {
-      setdislikeactive(false)
-      setdislike(Dislike - 1)
-    } else {
-      setdislikeactive(true)
-      setdislike(Like + 1)
-      if (likeactive) {
-        setlikeactive(false)
-        setdislike(Dislike + 1)
-        setlike(Like - 1)
-      }
-    }
-  }
 
   const [IdeaList, setIdeaList] = useState([])
 
@@ -229,7 +252,7 @@ const Post = () => {
                             className={[
                               dislikeactive ? "active-dislike " : null,
                             ].join("")}
-                            onClick={dislikef}
+                            onClick={()=>btndislike(val._id)}
                           >
                             <ThumbDownSharpIcon />
                           </ButtonLike>{" "}
