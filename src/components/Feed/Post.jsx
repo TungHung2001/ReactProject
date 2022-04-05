@@ -206,6 +206,8 @@ const Post = () => {
 
   const [likeactive, setlikeactive] = useState(false)
   const [dislikeactive, setdislikeactive] = useState(false)
+  const [Comment, setComment] = useState()
+  
 
   const btnlike = (id) => {
     if (likeactive) {
@@ -251,7 +253,17 @@ const Post = () => {
       }
     }
   }
-
+  const sendCMT = (id)=>{
+    if (Comment!=null){
+    axios.post("http://localhost:3001/comment",{
+      id:id,
+      Description:Comment
+    })
+    }
+  }
+  const onChange = (e)=>{
+      setComment(e.target.value)
+  }
   // function dislikef() {
   //   if (dislikeactive) {
   //     setdislikeactive(false)
@@ -268,13 +280,17 @@ const Post = () => {
   // }
 
   const [IdeaList, setIdeaList] = useState([])
-
+  const [CMTList, setCMTList]= useState([])
   useEffect(() => {
     axios.get("http://localhost:3001/idea").then((response) => {
       setIdeaList(response.data)
     })
   }, [])
-
+  useEffect(()=>{
+    axios.get("http://localhost:3001/commentlist").then((response)=>{
+      setCMTList(response.data)
+    })
+  })
   return (
     <>
       {IdeaList.map((val, key) => {
@@ -300,6 +316,7 @@ const Post = () => {
                 </PostCenter>
 
                 <PostBottom>
+                  <form>
                   <PBL>
                     <IconLike>
                       <MainLike>
@@ -326,6 +343,7 @@ const Post = () => {
                       </MainLike>
                     </IconLike>
                   </PBL>
+                  </form>
                   <PBR>
                     <br />
                     {/* vao file Idea/ShowPdf */}
@@ -336,18 +354,25 @@ const Post = () => {
                 </PostBottom>
                 <MainCom>
                   {" "}
+                  <form>
                   <InputContainer>
-                    <InputCom />
-                    <ButtonCom type="submit">send</ButtonCom>
+                    <InputCom onChange={onChange}/>
+                    <ButtonCom type="submit" onClick={()=>sendCMT(val._id)}>send</ButtonCom>
                   </InputContainer>
+                  </form>
                   <SectionCom>
+                    {CMTList.map((value,key)=>{
+                      if (value.idea_id === val._id){
+                      return(
                     <>
                       <Com>
-                        <ImgCom />
-                        <H3Com>NOT LAn</H3Com>
-                        <PCom>EeEEEEEEEEEE</PCom>
+                        <ImgCom src="https://scontent.fhan2-2.fna.fbcdn.net/v/t39.30808-6/249333559_4524520644302729_8542170375727490088_n.jpg?_nc_cat=110&ccb=1-5&_nc_sid=8bfeb9&_nc_ohc=raFemxQOAwgAX94MIVK&_nc_ht=scontent.fhan2-2.fna&oh=00_AT8wXIHUPVIlw8XA5qCLgf9thDEj-lyxs9nugspaWHxJxA&oe=6250D2EA" />
+                        <H3Com>Not Justin Bieber</H3Com>
+                        <PCom>{value.Description}</PCom>
                       </Com>
                     </>
+                      )}
+                    })}
                   </SectionCom>
                 </MainCom>
               </Wrapper>
