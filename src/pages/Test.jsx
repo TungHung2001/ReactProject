@@ -1,4 +1,5 @@
-import * as React from "react"
+import React from "react"
+import { useState } from "react"
 import Alert from "@mui/material/Alert"
 import Box from "@mui/material/Box"
 import InputLabel from "@mui/material/InputLabel"
@@ -51,50 +52,74 @@ const H1 = styled.h1`
 `
 const Label = styled.label``
 const Test = () => {
-  const required = (value) => {
-    if (!value) {
-      return (
-        <Alert variant="filled" severity="error">
-          This field is required!
-        </Alert>
-      )
-    }
-  }
-  const validEmail = (value) => {
-    if (!isEmail(value)) {
-      return (
-        <Alert variant="filled" severity="error">
-          valid email!!!
-        </Alert>
-      )
-    }
-  }
-  const vusername = (value) => {
-    if (value.length < 3 || value.length > 20) {
-      return (
-        <Alert variant="filled" severity="error">
-          The username must be between 3 and 20 characters.
-        </Alert>
-      )
-    }
-  }
-  const vpassword = (value) => {
-    if (value.length < 6 || value.length > 40) {
-      return (
-        <Alert variant="filled" severity="error">
-          The password must be between 6 and 40 characters.
-        </Alert>
-      )
-    }
-  }
-
-  const [Role, setRole] = React.useState("")
+  const [Username, setUsername] = useState()
+  const [Yourname, setYourname] = useState()
+  const [Email, setEmail] = useState()
+  const [Password, setPassword] = useState()
+  const [Role, setRole] = useState("")
+  // const required = (value) => {
+  //   if (!value) {
+  //     return (
+  //       <Alert variant="filled" severity="error" role="alert">
+  //         This field is required!
+  //       </Alert>
+  //     )
+  //   }
+  // }
+  // const validEmail = (value) => {
+  //   if (!isEmail(value)) {
+  //     return (
+  //       <Alert variant="filled" severity="error">
+  //         valid email!!!
+  //       </Alert>
+  //     )
+  //   }
+  // }
+  // const vusername = (value) => {
+  //   if (value.length < 3 || value.length > 20) {
+  //     return (
+  //       <Alert variant="filled" severity="error">
+  //         The username must be between 3 and 20 characters.
+  //       </Alert>
+  //     )
+  //   }
+  // }
+  // const vpassword = (value) => {
+  //   if (value.length < 6 || value.length > 40) {
+  //     return (
+  //       <Alert variant="filled" severity="error">
+  //         The password must be between 6 and 40 characters.
+  //       </Alert>
+  //     )
+  //   }
+  // }
 
   const handleChange = (event) => {
     setRole(event.target.value)
   }
+
+  const Changeusername = (e) => {
+    setUsername(e.target.value)
+  }
+  const Changeyourname = (e) => {
+    setYourname(e.target.value)
+  }
+
+  const ChangeEmail = (e) => {
+    setEmail(e.target.value)
+  }
+
+  const ChangePassword = (e) => {
+    setPassword(e.target.value)
+  }
   const handleSubmit = (e) => {
-    e.preventDefault()
+    axios.post("http://localhost:3001/register", {
+      Username: Username,
+      Yourname: Yourname,
+      Email: Email,
+      Password: Password,
+      Role: Role,
+    })
   }
   const [open, setOpen] = React.useState(false)
 
@@ -118,36 +143,44 @@ const Test = () => {
           <Input
             type="text"
             className="form-control"
-            name="username"
-            validations={[vusername]}
+            name="Username"
+            value={Username}
+            // validations={[required]}
+            onchange={Changeusername}
           />
           <Label htmlFor="Username">YourName</Label>
           <Input
             type="text"
             className="form-control"
-            name="Username"
-            validations={[required]}
+            name="Yourname"
+            value={Yourname}
+            // validations={[required]}
+            onChange={Changeyourname}
           />
           <Label htmlFor="Email">Email</Label>
           <Input
             type="text"
             className="form-control"
             name="Email"
-            validations={[validEmail]}
+            value={Email}
+            // validations={[required]}
+            onChange={ChangeEmail}
           />
           <Label htmlFor="Password<">Password</Label>
           <Input
             type="password"
             className="form-control"
             name="Password<"
-            validations={[vpassword]}
+            value={Password}
+            // validations={[required]}
+            onChange={ChangePassword}
           />
           <Label htmlFor="ConfirmPassword">Confirm Password</Label>
           <Input
             type="password"
             className="form-control"
             name="ConfirmPassword"
-            validations={[required]}
+            // validations={[required]}
           />
           <Sec>
             <Box sx={{ minWidth: 120 }}>
@@ -159,7 +192,7 @@ const Test = () => {
                   value={Role}
                   label="Role"
                   onChange={handleChange}
-                  validations={[required]}
+                  // validations={[required]}
                 >
                   <MenuItem value={0}>Manager</MenuItem>
                   <MenuItem value={1}>Admin</MenuItem>

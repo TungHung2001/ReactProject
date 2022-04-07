@@ -9,8 +9,12 @@ import {
   BarChart,
   Bar,
   Legend,
+  PieChart,
+  Pie,
+  Cell,
+  LabelList,
 } from "recharts"
-import { Chart1, Chart2, MainChart, H1, MainBox } from "./DashStyle"
+import { Chart1, Chart2, MainChart, H1, MainBox, Chart3 } from "./DashStyle"
 import Widget from "./Widget"
 const data1 = [
   { name: "2020", HN: 2500, HCM: 2300 },
@@ -26,6 +30,13 @@ const data2 = [
   { name: "2023", HN: 0, HCM: 0 },
   { name: "2024", HN: 0, HCM: 0 },
 ]
+const data3 = [
+  { name: "Group A", value: 400 },
+  { name: "Group B", value: 300 },
+  { name: "Group C", value: 300 },
+  { name: "Group D", value: 200 },
+]
+const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"]
 const Dashboard = () => {
   return (
     <>
@@ -36,11 +47,33 @@ const Dashboard = () => {
         <Widget type="department" />
       </MainBox>
       <MainChart>
+        <Chart3>
+          <PieChart width={300} height={400}>
+            <Pie
+              data={data3}
+              cx={120}
+              cy={200}
+              innerRadius={60}
+              outerRadius={80}
+              fill="#8884d8"
+              paddingAngle={5}
+              dataKey="value"
+            >
+              <LabelList dataKey="name" position="outside" />
+              {data3.map((entry, index) => (
+                <Cell
+                  key={`cell-${index}`}
+                  fill={COLORS[index % COLORS.length]}
+                />
+              ))}
+            </Pie>
+          </PieChart>
+        </Chart3>
         <Chart1>
           <H1>Ideas Submmited</H1>
 
           <AreaChart
-            width={900}
+            width={700}
             height={300}
             data={data1}
             margin={{
@@ -70,30 +103,29 @@ const Dashboard = () => {
             />
           </AreaChart>
         </Chart1>
-
-        <Chart2>
-          <H1>Contribution</H1>
-          <BarChart
-            width={900}
-            height={300}
-            data={data2}
-            margin={{
-              top: 20,
-              right: 30,
-              left: 20,
-              bottom: 5,
-            }}
-          >
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="name" />
-            <YAxis />
-            <Tooltip />
-            <Legend />
-            <Bar dataKey="HN" stackId="a" fill="#0288d1" />
-            <Bar dataKey="HCM" stackId="a" fill="#dd2c00" />
-          </BarChart>
-        </Chart2>
       </MainChart>
+      <Chart2>
+        <H1>Contribution</H1>
+        <BarChart
+          width={900}
+          height={300}
+          data={data2}
+          margin={{
+            top: 20,
+            right: 30,
+            left: 20,
+            bottom: 5,
+          }}
+        >
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis dataKey="name" />
+          <YAxis />
+          <Tooltip />
+          <Legend />
+          <Bar dataKey="HN" stackId="a" fill="#0288d1" />
+          <Bar dataKey="HCM" stackId="a" fill="#dd2c00" />
+        </BarChart>
+      </Chart2>
     </>
   )
 }

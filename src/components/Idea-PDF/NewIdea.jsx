@@ -1,4 +1,4 @@
-import { useState,useEffect } from "react"
+import { useState, useEffect } from "react"
 import * as React from "react"
 import Checkbox from "@mui/material/Checkbox"
 import Snackbar from "@mui/material/Snackbar"
@@ -28,6 +28,9 @@ const Form = styled.form`
   flex-direction: column;
 `
 const Input = styled.input``
+const Input1 = styled.input`
+  height: 100px;
+`
 const Button = styled.button`
   width: 100%;
   height: 50px;
@@ -59,28 +62,27 @@ const Label = styled.label`
   color: gray;
 `
 const Addpdf = () => {
-
   const [Title, setTitle] = useState()
   const [Description, setDescription] = useState()
-  const [IdeaList, setIdeaList] = useState([]);
-  const  handleSubmit  = (e) => {
+  const [IdeaList, setIdeaList] = useState([])
+  const handleSubmit = (e) => {
     axios.post("http://localhost:3001/insert", {
       Title: Title,
-      Description: Description
-    });  
+      Description: Description,
+    })
   }
-  useEffect(()=>{
-    axios.get("http://localhost:3001/idea").then((response)=>{
-      setIdeaList(response.data);
-    });
-  },[])
+  useEffect(() => {
+    axios.get("http://localhost:3001/idea").then((response) => {
+      setIdeaList(response.data)
+    })
+  }, [])
 
-  const changetile = (e)=>{
-    setTitle(e.target.value);
+  const changetile = (e) => {
+    setTitle(e.target.value)
   }
 
-  const changedes = (e)=>{
-    setDescription(e.target.value);
+  const changedes = (e) => {
+    setDescription(e.target.value)
   }
   const [isDisabled, setIsDisabled] = useState(true)
   const [checked, setChecked] = useState(false)
@@ -145,7 +147,7 @@ const Addpdf = () => {
           <Label>Title</Label>
           <Input placeholder="Title" type="text" onChange={changetile} />
           <Label>Description</Label>
-          <Input placeholder="Description" type="text" onChange={changedes}/>
+          <Input placeholder="Description" type="text" onChange={changedes} />
 
           <Input type="file" className="form-control" onChange={handleFile} />
 
@@ -193,14 +195,14 @@ const Addpdf = () => {
         {/* render this if we have pdfFile state null   */}
         {!pdfFile && <>No file is selected yet</>}
       </Pdf>
-        {IdeaList.map((val,key)=>{
-          return(
-            <>
+      {IdeaList.map((val, key) => {
+        return (
+          <>
             <h1>{val.Title}</h1>
             <h1>{val.Description}</h1>
-            </>
-          )
-        })}
+          </>
+        )
+      })}
     </>
   )
 }

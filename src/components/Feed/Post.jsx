@@ -18,7 +18,6 @@ const Main = styled.div`
   overflow: auto;
   @media only screen and (max-width: 380px) {
     display: flex;
-    width: 35%;
     overflow: none;
     margin: 10px 0;
   }
@@ -153,17 +152,19 @@ const SectionCom = styled.section`
 const H3Com = styled.h3`
   padding: 10px;
   @media only screen and (max-width: 380px) {
-    font-size: 16px;
+    font-size: 15px;
   }
 `
 const Com = styled.div`
   display: flex;
   padding: 10px; //trbl
+  @media only screen and (max-width: 380px) {
+  }
 `
 const PCom = styled.p`
   padding: 10px;
   @media only screen and (max-width: 380px) {
-    font-size: 15px;
+    font-size: 13px;
   }
 `
 const ImgCom = styled.img`
@@ -172,8 +173,8 @@ const ImgCom = styled.img`
   border-radius: 50%;
   object-fit: cover;
   @media only screen and (max-width: 380px) {
-    height: 32px;
-    width: 32px;
+    height: 15px;
+    width: 15px;
   }
 `
 const InputContainer = styled.div`
@@ -200,6 +201,15 @@ const ButtonCom = styled.button`
   background-color: #1775ee;
   margin: 10px;
 `
+const ButtonMore = styled.button`
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  border: none;
+  :hover {
+    background-color: #1775ee;
+  }
+`
 const Post = () => {
   // const [Like, setlike] = useState(1) // add like
   // const [Dislike, setdislike] = useState(1) // add dislike
@@ -207,7 +217,6 @@ const Post = () => {
   const [likeactive, setlikeactive] = useState(false)
   const [dislikeactive, setdislikeactive] = useState(false)
   const [Comment, setComment] = useState()
-  
 
   const btnlike = (id) => {
     if (likeactive) {
@@ -253,16 +262,16 @@ const Post = () => {
       }
     }
   }
-  const sendCMT = (id)=>{
-    if (Comment!=null){
-    axios.post("http://localhost:3001/comment",{
-      id:id,
-      Description:Comment
-    })
+  const sendCMT = (id) => {
+    if (Comment != null) {
+      axios.post("http://localhost:3001/comment", {
+        id: id,
+        Description: Comment,
+      })
     }
   }
-  const onChange = (e)=>{
-      setComment(e.target.value)
+  const onChange = (e) => {
+    setComment(e.target.value)
   }
   // function dislikef() {
   //   if (dislikeactive) {
@@ -280,14 +289,14 @@ const Post = () => {
   // }
 
   const [IdeaList, setIdeaList] = useState([])
-  const [CMTList, setCMTList]= useState([])
+  const [CMTList, setCMTList] = useState([])
   useEffect(() => {
     axios.get("http://localhost:3001/idea").then((response) => {
       setIdeaList(response.data)
     })
   }, [])
-  useEffect(()=>{
-    axios.get("http://localhost:3001/commentlist").then((response)=>{
+  useEffect(() => {
+    axios.get("http://localhost:3001/commentlist").then((response) => {
       setCMTList(response.data)
     })
   })
@@ -305,7 +314,9 @@ const Post = () => {
                     <PDate></PDate>
                   </PTL>
                   <PTR></PTR>
-                  <MoreVertRoundedIcon />
+                  <ButtonMore>
+                    <MoreVertRoundedIcon />
+                  </ButtonMore>
                 </PostTop>
 
                 <PostCenter>
@@ -317,32 +328,32 @@ const Post = () => {
 
                 <PostBottom>
                   <form>
-                  <PBL>
-                    <IconLike>
-                      <MainLike>
-                        <Blike>
-                          <ButtonLike
-                            className={[
-                              likeactive ? "active-like " : null,
-                            ].join("")}
-                            onClick={() => btnlike(val._id)}
-                          >
-                            <ThumbUpOffAltSharpIcon />
-                          </ButtonLike>{" "}
-                          <PLike>{val.Like}</PLike>
-                          <ButtonLike
-                            className={[
-                              dislikeactive ? "active-dislike " : null,
-                            ].join("")}
-                            onClick={() => btndislike(val._id)}
-                          >
-                            <ThumbDownSharpIcon />
-                          </ButtonLike>{" "}
-                          <PLike>{val.Dislike}</PLike>
-                        </Blike>
-                      </MainLike>
-                    </IconLike>
-                  </PBL>
+                    <PBL>
+                      <IconLike>
+                        <MainLike>
+                          <Blike>
+                            <ButtonLike
+                              className={[
+                                likeactive ? "active-like " : null,
+                              ].join("")}
+                              onClick={() => btnlike(val._id)}
+                            >
+                              <ThumbUpOffAltSharpIcon />
+                            </ButtonLike>{" "}
+                            <PLike>{val.Like}</PLike>
+                            <ButtonLike
+                              className={[
+                                dislikeactive ? "active-dislike " : null,
+                              ].join("")}
+                              onClick={() => btndislike(val._id)}
+                            >
+                              <ThumbDownSharpIcon />
+                            </ButtonLike>{" "}
+                            <PLike>{val.Dislike}</PLike>
+                          </Blike>
+                        </MainLike>
+                      </IconLike>
+                    </PBL>
                   </form>
                   <PBR>
                     <br />
@@ -355,23 +366,27 @@ const Post = () => {
                 <MainCom>
                   {" "}
                   <form>
-                  <InputContainer>
-                    <InputCom onChange={onChange}/>
-                    <ButtonCom type="submit" onClick={()=>sendCMT(val._id)}>send</ButtonCom>
-                  </InputContainer>
+                    <InputContainer>
+                      <InputCom onChange={onChange} />
+                      <ButtonCom type="submit" onClick={() => sendCMT(val._id)}>
+                        send
+                      </ButtonCom>
+                    </InputContainer>
                   </form>
                   <SectionCom>
-                    {CMTList.map((value,key)=>{
-                      if (value.idea_id === val._id){
-                      return(
-                    <>
-                      <Com>
-                        <ImgCom src="https://scontent.fhan2-2.fna.fbcdn.net/v/t39.30808-6/249333559_4524520644302729_8542170375727490088_n.jpg?_nc_cat=110&ccb=1-5&_nc_sid=8bfeb9&_nc_ohc=raFemxQOAwgAX94MIVK&_nc_ht=scontent.fhan2-2.fna&oh=00_AT8wXIHUPVIlw8XA5qCLgf9thDEj-lyxs9nugspaWHxJxA&oe=6250D2EA" />
-                        <H3Com>Not Justin Bieber</H3Com>
-                        <PCom>{value.Description}</PCom>
-                      </Com>
-                    </>
-                      )}
+                    {CMTList.map((value, key) => {
+                      if (value.idea_id === val._id) {
+                        return (
+                          <>
+                            <Com>
+                              <ImgCom src="https://scontent.fhan2-2.fna.fbcdn.net/v/t39.30808-6/249333559_4524520644302729_8542170375727490088_n.jpg?_nc_cat=110&ccb=1-5&_nc_sid=8bfeb9&_nc_ohc=raFemxQOAwgAX94MIVK&_nc_ht=scontent.fhan2-2.fna&oh=00_AT8wXIHUPVIlw8XA5qCLgf9thDEj-lyxs9nugspaWHxJxA&oe=6250D2EA" />
+                              <H3Com>Not Justin Bieber</H3Com>
+                              <br />
+                              <PCom>{value.Description}</PCom>
+                            </Com>
+                          </>
+                        )
+                      }
                     })}
                   </SectionCom>
                 </MainCom>
