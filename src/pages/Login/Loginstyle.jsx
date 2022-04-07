@@ -8,17 +8,18 @@ export const Main = styled.div`
   background-size: cover;
   background-position: center;
 `
-export const Form1 = styled.form`
+export const Form = styled.form`
   background-color: #f0f2f5;
   padding: 0px 60px;
   border-radius: 10px;
 `
-export const Input1 = styled.input`
+export const Input = styled.input`
   display: flex;
   flex-direction: column;
   width: 300px; //280px
 `
 export const Label = styled.label`
+  display: flex;
   font-size: 16px;
   color: gray;
 `
@@ -37,4 +38,5 @@ export const Button = styled.button`
 `
 export const Img = styled.img`
   border-radius: 50%;
+  padding: 30px;
 `
