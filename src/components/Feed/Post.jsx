@@ -1,215 +1,47 @@
 import React, { useEffect, useState } from "react"
-import styled from "styled-components"
-
 import MoreVertRoundedIcon from "@mui/icons-material/MoreVertRounded"
-
-import { Link } from "react-router-dom"
 import axios from "axios"
-
 import ThumbUpOffAltSharpIcon from "@mui/icons-material/ThumbUpOffAltSharp"
 import ThumbDownSharpIcon from "@mui/icons-material/ThumbDownSharp"
+import Menu from "@mui/material/Menu"
+import MenuItem from "@mui/material/MenuItem"
+import DeleteIcon from "@mui/icons-material/Delete"
+import EditIcon from "@mui/icons-material/Edit"
+import {
+  Main,
+  Wrapper,
+  PostTop,
+  Ava,
+  PTL,
+  PTR,
+  PUserName,
+  PDate,
+  PText,
+  PostCenter,
+  PostBottom,
+  PBL,
+  PBR,
+  IconLike,
+  PDF,
+  LinkLabel,
+  Title,
+  MainLike,
+  ButtonLike,
+  PLike,
+  Blike,
+  MainCom,
+  SectionCom,
+  H3Com,
+  Com,
+  PCom,
+  ImgCom,
+  InputContainer,
+  InputCom,
+  ButtonCom,
+  ButtonMore,
+} from "./PostStyle"
 import "./Like.css"
-const Main = styled.div`
-  width: 100%;
-  border-radius: 10px;
-  -webkit-box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
-  box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
-  margin: 30px 0;
-  overflow: auto;
-  @media only screen and (max-width: 380px) {
-    display: flex;
-    overflow: none;
-    margin: 10px 0;
-  }
-`
-const Wrapper = styled.div`
-  padding: 10px;
-  @media only screen and (max-width: 380px) {
-    width: 90%;
-    margin-left: 30px;
-  }
-`
-const PostTop = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-`
-const Ava = styled.img`
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  object-fit: cover;
-  @media only screen and (max-width: 380px) {
-  }
-`
 
-const PTL = styled.div`
-  display: flex;
-  align-items: center;
-  @media only screen and (max-width: 380px) {
-  }
-`
-const PTR = styled.div``
-const PUserName = styled.span`
-  font-size: 15px;
-  font-weight: 500;
-  margin: 0 10px;
-`
-const PDate = styled.span`
-  font-size: 12px;
-`
-const PText = styled.span`
-  overflow: auto;
-  display: flex;
-  @media only screen and (max-width: 380px) {
-    overflow: hidden;
-  }
-`
-const PostCenter = styled.div`
-  margin: 20px 0;
-`
-const PostBottom = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-`
-const PBL = styled.div`
-  display: flex;
-  align-items: center;
-`
-const PBR = styled.div``
-
-const IconLike = styled.div`
-  margin-right: 5px;
-  margin-left: 5px;
-`
-const PDF = styled(Link)``
-const LinkLabel = styled.button`
-  width: 100px;
-  height: 40px;
-  color: white;
-  font-weight: bold;
-  font-size: 13px;
-  background-color: #1e88e5;
-  border: none;
-  border-radius: 10px;
-  :hover {
-    background-color: #1a237e;
-  }
-  @media only screen and (max-width: 380px) {
-    width: 70px;
-    height: 30px;
-  }
-`
-const Title = styled.span`
-  overflow: auto;
-  display: flex;
-  font-size: 18px;
-`
-const MainLike = styled.div`
-  display: flex;
-`
-const ButtonLike = styled.button`
-  display: flex;
-  margin: 5px;
-  border: none;
-  width: 32px;
-  height: 32px;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  :hover {
-    background-color: #9e9e9e;
-  }
-`
-const PLike = styled.p`
-  margin: 8px 5px 5px 0px; //tlbr
-  font-size: 20px;
-  display: flex;
-`
-
-const Blike = styled.div`
-  display: flex;
-  flex-direction: row;
-`
-const MainCom = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  width: 100%;
-`
-const SectionCom = styled.section`
-  padding: 5px 5px;
-  width: 100%;
-  overflow: scroll;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  flex-direction: column;
-  height: 250px;
-`
-const H3Com = styled.h3`
-  padding: 10px;
-  @media only screen and (max-width: 380px) {
-    font-size: 15px;
-  }
-`
-const Com = styled.div`
-  display: flex;
-  padding: 10px; //trbl
-  @media only screen and (max-width: 380px) {
-  }
-`
-const PCom = styled.p`
-  padding: 10px;
-  @media only screen and (max-width: 380px) {
-    font-size: 13px;
-  }
-`
-const ImgCom = styled.img`
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  object-fit: cover;
-  @media only screen and (max-width: 380px) {
-    height: 15px;
-    width: 15px;
-  }
-`
-const InputContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  padding: 0px 5px;
-`
-const InputCom = styled.input`
-  width: 100%;
-  height: 35px;
-  border-radius: 10px;
-  @media only screen and (max-width: 380px) {
-    height: 20px;
-  }
-`
-const ButtonCom = styled.button`
-  width: 130px;
-  border: none;
-  border-radius: 10px;
-  font-weight: bold;
-  font-size: 15px;
-  color: white;
-  background-color: #1775ee;
-  margin: 10px;
-`
-const ButtonMore = styled.button`
-  height: 30px;
-  width: 30px;
-  border-radius: 50%;
-  border: none;
-  :hover {
-    background-color: #1775ee;
-  }
-`
 const Post = () => {
   // const [Like, setlike] = useState(1) // add like
   // const [Dislike, setdislike] = useState(1) // add dislike
@@ -300,6 +132,20 @@ const Post = () => {
       setCMTList(response.data)
     })
   })
+
+  // dau 3 cham
+  const [anchorEl, setAnchorEl] = React.useState(null)
+  const open = Boolean(anchorEl)
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget)
+  }
+  const handleClose = () => {
+    setAnchorEl(null)
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+  }
   return (
     <>
       {IdeaList.map((val, key) => {
@@ -314,9 +160,39 @@ const Post = () => {
                     <PDate></PDate>
                   </PTL>
                   <PTR></PTR>
-                  <ButtonMore>
+                  <ButtonMore
+                    id="demo-positioned-button"
+                    aria-controls={open ? "demo-positioned-menu" : undefined}
+                    aria-haspopup="true"
+                    aria-expanded={open ? "true" : undefined}
+                    onClick={handleClick}
+                  >
                     <MoreVertRoundedIcon />
                   </ButtonMore>
+                  <Menu
+                    id="demo-positioned-menu"
+                    aria-labelledby="demo-positioned-button"
+                    anchorEl={anchorEl}
+                    open={open}
+                    onClose={handleClose}
+                    anchorOrigin={{
+                      vertical: "top",
+                      horizontal: "left",
+                    }}
+                    transformOrigin={{
+                      vertical: "top",
+                      horizontal: "left",
+                    }}
+                  >
+                    <MenuItem onClick={handleClose}>
+                      <EditIcon />
+                      Edit
+                    </MenuItem>
+                    <MenuItem onClick={handleClose}>
+                      <DeleteIcon />
+                      Delete
+                    </MenuItem>
+                  </Menu>
                 </PostTop>
 
                 <PostCenter>

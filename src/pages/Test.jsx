@@ -7,7 +7,7 @@ import MenuItem from "@mui/material/MenuItem"
 import FormControl from "@mui/material/FormControl"
 import Select from "@mui/material/Select"
 import styled from "styled-components"
-import { isEmail } from "validator"
+import { useForm } from "react-hook-form"
 import Snackbar from "@mui/material/Snackbar"
 import axios from "axios"
 const FormLog = styled.div`
@@ -57,42 +57,6 @@ const Test = () => {
   const [Email, setEmail] = useState()
   const [Password, setPassword] = useState()
   const [Role, setRole] = useState("")
-  // const required = (value) => {
-  //   if (!value) {
-  //     return (
-  //       <Alert variant="filled" severity="error" role="alert">
-  //         This field is required!
-  //       </Alert>
-  //     )
-  //   }
-  // }
-  // const validEmail = (value) => {
-  //   if (!isEmail(value)) {
-  //     return (
-  //       <Alert variant="filled" severity="error">
-  //         valid email!!!
-  //       </Alert>
-  //     )
-  //   }
-  // }
-  // const vusername = (value) => {
-  //   if (value.length < 3 || value.length > 20) {
-  //     return (
-  //       <Alert variant="filled" severity="error">
-  //         The username must be between 3 and 20 characters.
-  //       </Alert>
-  //     )
-  //   }
-  // }
-  // const vpassword = (value) => {
-  //   if (value.length < 6 || value.length > 40) {
-  //     return (
-  //       <Alert variant="filled" severity="error">
-  //         The password must be between 6 and 40 characters.
-  //       </Alert>
-  //     )
-  //   }
-  // }
 
   const handleChange = (event) => {
     setRole(event.target.value)
@@ -112,7 +76,8 @@ const Test = () => {
   const ChangePassword = (e) => {
     setPassword(e.target.value)
   }
-  const handleSubmit = (e) => {
+  const handleClick = () => {
+    setOpen(true)
     axios.post("http://localhost:3001/register", {
       Username: Username,
       Yourname: Yourname,
@@ -121,11 +86,13 @@ const Test = () => {
       Role: Role,
     })
   }
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm()
+  const onSubmit = (data) => console.log(data)
   const [open, setOpen] = React.useState(false)
-
-  const handleClick = () => {
-    setOpen(true)
-  }
 
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
@@ -134,54 +101,82 @@ const Test = () => {
 
     setOpen(false)
   }
+  const registerOptions = {
+    name: { required: "Name is required" },
+    email: {
+      required: (
+        <Alert variant="filled" severity="error">
+          "Email is required"
+        </Alert>
+      ),
+    },
+    password: {
+      required: (
+        <Alert variant="filled" severity="error">
+          "Password is required"
+        </Alert>
+      ),
+      minLength: {
+        value: 8,
+        message: (
+          <Alert variant="filled" severity="error">
+            "Password must have at least 8 characters"
+          </Alert>
+        ),
+      },
+    },
+  }
   return (
     <>
       <FormLog>
-        <Form onSubmit={handleSubmit}>
+        <Form onSubmit={handleSubmit(onSubmit)}>
           <H1>Register</H1>
           <Label htmlFor="username">Username</Label>
           <Input
             type="text"
-            className="form-control"
             name="Username"
             value={Username}
-            // validations={[required]}
             onchange={Changeusername}
+            {...register("username", { required: true })}
           />
+          {errors.username && (
+            <Alert variant="filled" severity="error">
+              name is required.
+            </Alert>
+          )}
           <Label htmlFor="Username">YourName</Label>
           <Input
             type="text"
-            className="form-control"
             name="Yourname"
             value={Yourname}
-            // validations={[required]}
             onChange={Changeyourname}
+            {...register("yourName", { required: true })}
           />
+          {errors.yourName && (
+            <Alert variant="filled" severity="error">
+              yourName is required.
+            </Alert>
+          )}
           <Label htmlFor="Email">Email</Label>
           <Input
             type="text"
-            className="form-control"
             name="Email"
             value={Email}
-            // validations={[required]}
             onChange={ChangeEmail}
+            {...register("email", registerOptions.email)}
           />
+          {errors?.email && errors.email.message}
           <Label htmlFor="Password<">Password</Label>
           <Input
             type="password"
-            className="form-control"
             name="Password<"
             value={Password}
-            // validations={[required]}
             onChange={ChangePassword}
+            {...register("password", registerOptions.password)}
           />
+          {errors?.password && errors.password.message}
           <Label htmlFor="ConfirmPassword">Confirm Password</Label>
-          <Input
-            type="password"
-            className="form-control"
-            name="ConfirmPassword"
-            // validations={[required]}
-          />
+          <Input type="password" name="ConfirmPassword" />
           <Sec>
             <Box sx={{ minWidth: 120 }}>
               <FormControl fullWidth>
@@ -192,13 +187,12 @@ const Test = () => {
                   value={Role}
                   label="Role"
                   onChange={handleChange}
-                  // validations={[required]}
+                  {...register("role", { required: true })}
                 >
                   <MenuItem value={0}>Manager</MenuItem>
                   <MenuItem value={1}>Admin</MenuItem>
                   <MenuItem value={2}>Staff</MenuItem>
-                  <MenuItem value={3}>Staff</MenuItem>
-                  {/* Chon role */}
+                  <MenuItem value={3}>QA</MenuItem>
                 </Select>
               </FormControl>
             </Box>
