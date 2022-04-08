@@ -65,7 +65,7 @@ const Addpdf = () => {
   const [Title, setTitle] = useState()
   const [Description, setDescription] = useState()
   const [IdeaList, setIdeaList] = useState([])
-  const handleSubmit = (e) => {
+  const handleSubmit1 = (e) => {
     axios.post("http://localhost:3001/insert", {
       Title: Title,
       Description: Description,
@@ -137,17 +137,52 @@ const Addpdf = () => {
   const Alert = React.forwardRef(function Alert(props, ref) {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />
   })
-
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm()
+  const registerOptions = {
+    titleval: {
+      required: (
+        <Alert variant="filled" severity="error">
+          Titile is required
+        </Alert>
+      ),
+    },
+    desval: {
+      required: (
+        <Alert variant="filled" severity="error">
+          "Description is required"
+        </Alert>
+      ),
+    },
+  }
   return (
     <>
       <Main>
         {/* Upload PDF */}
-        <Form onSubmit={handleSubmit}>
+        <Form onSubmit={handleSubmit(handleSubmit1)}>
           <H2>New Idea</H2>
           <Label>Title</Label>
-          <Input placeholder="Title" type="text" onChange={changetile} />
+          <Input
+            placeholder="Title"
+            type="text"
+            onChange={changetile}
+            {...register("titleval", registerOptions.titleval)}
+          />
+
+          {errors?.titleval && errors.titleval.message}
+
           <Label>Description</Label>
-          <Input placeholder="Description" type="text" onChange={changedes} />
+          <Input
+            placeholder="Description"
+            type="text"
+            onChange={changedes}
+            {...register("desval", registerOptions.desval)}
+          />
+
+          {errors?.desval && errors.desval.message}
 
           <Input type="file" className="form-control" onChange={handleFile} />
 

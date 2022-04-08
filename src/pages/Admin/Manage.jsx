@@ -1,11 +1,11 @@
 import * as React from "react"
+import { useState } from "react"
 import Paper from "@mui/material/Paper"
 import Table from "@mui/material/Table"
 import TableBody from "@mui/material/TableBody"
 import TableCell from "@mui/material/TableCell"
 import TableContainer from "@mui/material/TableContainer"
 import TableHead from "@mui/material/TableHead"
-
 import TableRow from "@mui/material/TableRow"
 import Button from "@mui/material/Button"
 import DeleteIcon from "@mui/icons-material/Delete"
@@ -23,6 +23,38 @@ const Link1 = styled(Link)`
 `
 
 export default function StickyHeadTable() {
+  // const [Id, SetId] = useState()
+  // const [User, SetUser] = useState()
+  // const [Role, SetRole] = useState()
+  // const [Department, SetDepartment] = useState()
+  // const [Username, SetUsername] = useState()
+  // const [Password, SetPassword] = useState()
+  // const [Name, SetName] = useState()
+  // const [Email, SetEmail] = useState()
+  // const ChangeId = (e) => {
+  //   setId(e.target.value)
+  // }
+  // const ChangeUser = (e) => {
+  //   setUser(e.target.value)
+  // }
+  // const ChangeRole = (e) => {
+  //   setRole(e.target.value)
+  // }
+  // const ChangeDepartment = (e) => {
+  //   setDepartment(e.target.value)
+  // }
+  // const ChangeUsername = (e) => {
+  //   setUsername(e.target.value)
+  // }
+  // const ChangePassword = (e) => {
+  //   setPassword(e.target.value)
+  // }
+  // const ChangeName = (e) => {
+  //   setName(e.target.value)
+  // }
+  // const ChangeEmail = (e) => {
+  //   setEmail(e.target.value)
+  // }
   return (
     <Paper sx={{ width: "100%", overflow: "hidden" }}>
       <Link1 to="/Register">
@@ -32,14 +64,54 @@ export default function StickyHeadTable() {
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
             <TableRow>
-              <TableCell style={{}}>ID</TableCell>
-              <TableCell style={{}}>User</TableCell>
-              <TableCell style={{}}>Role</TableCell>
-              <TableCell style={{}}>Department</TableCell>
-              <TableCell style={{}}>Username</TableCell>
-              <TableCell style={{}}>Password</TableCell>
-              <TableCell style={{}}>Name</TableCell>
-              <TableCell style={{}}>Email</TableCell>
+              <TableCell
+                style={{}}
+                // onchange={ChangeId}
+              >
+                ID
+              </TableCell>
+              <TableCell
+                style={{}}
+                // onChange={ChangeUser}
+              >
+                User
+              </TableCell>
+              <TableCell
+                style={{}}
+                // onChange={ChangeRole}
+              >
+                Role
+              </TableCell>
+              <TableCell
+                style={{}}
+                // onChange={ChangeDepartment}
+              >
+                Department
+              </TableCell>
+              <TableCell
+                style={{}}
+                // onChange={ChangeUsername}
+              >
+                Username
+              </TableCell>
+              <TableCell
+                style={{}}
+                // onChange={ChangePassword}
+              >
+                Password
+              </TableCell>
+              <TableCell
+                style={{}}
+                // onChange={ChangeName}
+              >
+                Name
+              </TableCell>
+              <TableCell
+                style={{}}
+                //  onChange={ChangeEmail}
+              >
+                Email
+              </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>

@@ -58,8 +58,8 @@ const Test = () => {
   const [Password, setPassword] = useState()
   const [Role, setRole] = useState("")
 
-  const handleChange = (event) => {
-    setRole(event.target.value)
+  const handleChange = (e) => {
+    setRole(e.target.value)
   }
 
   const Changeusername = (e) => {
@@ -76,6 +76,7 @@ const Test = () => {
   const ChangePassword = (e) => {
     setPassword(e.target.value)
   }
+
   const handleClick = () => {
     setOpen(true)
     axios.post("http://localhost:3001/register", {
@@ -169,7 +170,7 @@ const Test = () => {
           <Label htmlFor="Password<">Password</Label>
           <Input
             type="password"
-            name="Password<"
+            name="Password"
             value={Password}
             onChange={ChangePassword}
             {...register("password", registerOptions.password)}
@@ -187,7 +188,6 @@ const Test = () => {
                   value={Role}
                   label="Role"
                   onChange={handleChange}
-                  {...register("role", { required: true })}
                 >
                   <MenuItem value={0}>Manager</MenuItem>
                   <MenuItem value={1}>Admin</MenuItem>
