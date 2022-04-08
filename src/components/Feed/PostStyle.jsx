@@ -6,6 +6,7 @@ export const Main = styled.div`
   -webkit-box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
   box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
   margin: 30px 0;
+  height: 350px;
   overflow: auto;
   @media only screen and (max-width: 380px) {
     display: flex;
