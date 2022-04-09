@@ -109,6 +109,46 @@ const SetDate = () => {
             Submit success!!!
           </Alert>
         </Snackbar>
+
+        <Form onSubmit={handleSubmit(onSubmit)}>
+          <H1>Set date Comment</H1>
+          <Label>Title</Label>
+          <Input placeholder="title" type="text" />
+
+          <TextField
+            id="startdate"
+            label="Start Date"
+            type="datetime-local"
+            defaultValue="2022-03-10T10:30"
+            sx={{ width: 250, backgroundColor: "white" }}
+            InputLabelProps={{
+              shrink: true,
+            }}
+          />
+          <br />
+          <TextField
+            id="enddate"
+            label="End Date"
+            type="datetime-local"
+            defaultValue="2022-03-10T12:00"
+            sx={{ width: 250, backgroundColor: "white" }}
+            InputLabelProps={{
+              shrink: true,
+            }}
+          />
+          <Button type="submit" variant="outlined" onClick={handleClick}>
+            Submit
+          </Button>
+        </Form>
+        <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+          <Alert
+            onClose={handleClose}
+            severity="success"
+            sx={{ width: "100%" }}
+          >
+            Submit success!!!
+          </Alert>
+        </Snackbar>
       </Main>
     </>
   )

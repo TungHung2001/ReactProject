@@ -58,7 +58,7 @@ export const PText = styled.span`
   }
 `
 export const PostCenter = styled.div`
-  margin: 20px 0;
+  margin-top: 20px;
 `
 export const PostBottom = styled.div`
   display: flex;
@@ -169,7 +169,7 @@ export const ImgCom = styled.img`
     width: 15px;
   }
 `
-export const InputContainer = styled.div`
+export const InputContainer = styled.form`
   display: flex;
   justify-content: center;
   width: 100%;

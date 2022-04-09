@@ -241,14 +241,12 @@ const Post = () => {
                 </PostBottom>
                 <MainCom>
                   {" "}
-                  <form>
-                    <InputContainer>
-                      <InputCom onChange={onChange} />
-                      <ButtonCom type="submit" onClick={() => sendCMT(val._id)}>
-                        send
-                      </ButtonCom>
-                    </InputContainer>
-                  </form>
+                  <InputContainer>
+                    <InputCom onChange={onChange} />
+                    <ButtonCom type="submit" onClick={() => sendCMT(val._id)}>
+                      send
+                    </ButtonCom>
+                  </InputContainer>
                   <SectionCom>
                     {CMTList.map((value, key) => {
                       if (value.idea_id === val._id) {
