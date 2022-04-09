@@ -134,12 +134,12 @@ export const MainCom = styled.div`
 export const SectionCom = styled.section`
   padding: 5px 5px;
   width: 100%;
-  overflow: scroll;
+  overflow: auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
   flex-direction: column;
-  height: 250px;
+  height: 300px;
 `
 export const H3Com = styled.h3`
   padding: 10px;
