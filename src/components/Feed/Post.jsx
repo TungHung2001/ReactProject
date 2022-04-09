@@ -203,34 +203,33 @@ const Post = () => {
                 </PostCenter>
 
                 <PostBottom>
-                  <form>
-                    <PBL>
-                      <IconLike>
-                        <MainLike>
-                          <Blike>
-                            <ButtonLike
-                              className={[
-                                likeactive ? "active-like " : null,
-                              ].join("")}
-                              onClick={() => btnlike(val._id)}
-                            >
-                              <ThumbUpOffAltSharpIcon />
-                            </ButtonLike>{" "}
-                            <PLike>{val.Like}</PLike>
-                            <ButtonLike
-                              className={[
-                                dislikeactive ? "active-dislike " : null,
-                              ].join("")}
-                              onClick={() => btndislike(val._id)}
-                            >
-                              <ThumbDownSharpIcon />
-                            </ButtonLike>{" "}
-                            <PLike>{val.Dislike}</PLike>
-                          </Blike>
-                        </MainLike>
-                      </IconLike>
-                    </PBL>
-                  </form>
+                  <PBL>
+                    <IconLike>
+                      <MainLike>
+                        <Blike>
+                          <ButtonLike
+                            className={[
+                              likeactive ? "active-like " : null,
+                            ].join("")}
+                            onClick={() => btnlike(val._id)}
+                          >
+                            <ThumbUpOffAltSharpIcon />
+                          </ButtonLike>{" "}
+                          <PLike>{val.Like}</PLike>
+                          <ButtonLike
+                            className={[
+                              dislikeactive ? "active-dislike " : null,
+                            ].join("")}
+                            onClick={() => btndislike(val._id)}
+                          >
+                            <ThumbDownSharpIcon />
+                          </ButtonLike>{" "}
+                          <PLike>{val.Dislike}</PLike>
+                        </Blike>
+                      </MainLike>
+                    </IconLike>
+                  </PBL>
+
                   <PBR>
                     <br />
                     {/* vao file Idea/ShowPdf */}

@@ -32,13 +32,20 @@ const Login = () => {
     formState: { errors },
   } = useForm()
   const registerOptions = {
-    name: { required: "Name is required" },
     email: {
       required: (
         <Alert variant="filled" severity="error">
           "Email is required"
         </Alert>
       ),
+      pattern: {
+        value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+        message: (
+          <Alert variant="filled" severity="error">
+            invalid email address - @gmail.com
+          </Alert>
+        ),
+      },
     },
     password: {
       required: (

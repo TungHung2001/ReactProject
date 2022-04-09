@@ -71,7 +71,7 @@ export const PBL = styled.div`
 `
 export const PBR = styled.div``
 
-export const IconLike = styled.div`
+export const IconLike = styled.form`
   margin-right: 5px;
   margin-left: 5px;
 `
@@ -149,7 +149,7 @@ export const H3Com = styled.h3`
 `
 export const Com = styled.div`
   display: flex;
-  padding: 10px; //trbl
+  padding: 4px; //trbl
   @media only screen and (max-width: 380px) {
   }
 `
