@@ -62,10 +62,10 @@ const Test = () => {
     setRole(e.target.value)
   }
 
-  const Changeusername = (e) => {
+  const ChangeUsername = (e) => {
     setUsername(e.target.value)
   }
-  const Changeyourname = (e) => {
+  const ChangeYourname = (e) => {
     setYourname(e.target.value)
   }
 
@@ -113,8 +113,8 @@ const Test = () => {
     setOpen(false)
   }
   const registerOptions = {
-    name: { required: "Name is required" },
-    email: {
+    Username: { required: "Name is required" },
+    Email: {
       required: (
         <Alert variant="filled" severity="error">
           "Email is required"
@@ -129,7 +129,7 @@ const Test = () => {
         ),
       },
     },
-    password: {
+    Password: {
       required: (
         <Alert variant="filled" severity="error">
           "Password is required"
