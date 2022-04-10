@@ -52,7 +52,6 @@ const Sec = styled.div`
   border-radius: 10px;
 `
 
-
 const LoginForm = () => {
   const [Role, setRole] = useState("")
   const [Username, setUsername] = useState("")
@@ -60,19 +59,18 @@ const LoginForm = () => {
   const [Email, setEmail] = useState("")
   const [Password, setPassword] = useState("")
 
-  const addToList = (e)=>{
-    axios.post("http://localhost:3001/register", 
-    {
+  const addToList = (e) => {
+    axios.post("http://localhost:3001/register", {
       Username: Username,
       Yourname: Yourname,
       Email: Email,
       Password: Password,
-      Role: Role
-    });
-    if (e){
-      alert('submit form successfuly!!!')
-    }else{
-      alert('submit failure!!!')
+      Role: Role,
+    })
+    if (e) {
+      alert("submit form successfuly!!!")
+    } else {
+      alert("submit failure!!!")
     }
   }
 
@@ -145,12 +143,12 @@ const LoginForm = () => {
     },
   ]
 
-  const onChange = e => {
+  const onChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value })
-    if (e.target.name === 'Username') setUsername(e.target.value);
-    else if (e.target.name === 'Yourname') setYourname(e.target.value);
-    else if (e.target.name === 'Email') setEmail(e.target.value);
-    else if (e.target.name === 'Password') setPassword(e.target.value);
+    if (e.target.name === "Username") setUsername(e.target.value)
+    else if (e.target.name === "Yourname") setYourname(e.target.value)
+    else if (e.target.name === "Email") setEmail(e.target.value)
+    else if (e.target.name === "Password") setPassword(e.target.value)
   }
 
   return (
@@ -178,10 +176,10 @@ const LoginForm = () => {
                   label="Role"
                   onChange={handleChange}
                 >
-                  <MenuItem value={0}>Manager</MenuItem>
-                  <MenuItem value={1}>Admin</MenuItem>
-                  <MenuItem value={2}>Staff</MenuItem>
-                  <MenuItem value={3}>Staff</MenuItem>
+                  <MenuItem value="Manager">Manager</MenuItem>
+                  <MenuItem value="Admin">Admin</MenuItem>
+                  <MenuItem value="Staff">Staff</MenuItem>
+                  <MenuItem value="QA">QA</MenuItem>
                   {/* Chon role */}
                 </Select>
               </FormControl>

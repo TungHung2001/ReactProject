@@ -77,8 +77,18 @@ const Test = () => {
     setPassword(e.target.value)
   }
 
-  const handleClick = () => {
+  const handleClick = (e) => {
+    // axios.post("http://localhost:3001/register", {
+    //   Username: Username,
+    //   Yourname: Yourname,
+    //   Email: Email,
+    //   Password: Password,
+    //   Role: Role,
+    // })
     setOpen(true)
+  }
+
+  const onSubmit = () => {
     axios.post("http://localhost:3001/register", {
       Username: Username,
       Yourname: Yourname,
@@ -92,7 +102,7 @@ const Test = () => {
     handleSubmit,
     formState: { errors },
   } = useForm()
-  const onSubmit = (data) => console.log(data)
+  // const onSubmit = (data) => console.log(data)
   const [open, setOpen] = React.useState(false)
 
   const handleClose = (event, reason) => {
@@ -138,54 +148,54 @@ const Test = () => {
   return (
     <>
       <FormLog>
-        <Form onSubmit={handleSubmit(onSubmit)}>
+        <Form onSubmit={onSubmit}>
           <H1>Register</H1>
-          <Label htmlFor="username">Username</Label>
+          <Label htmlFor="Username">Username</Label>
           <Input
             type="text"
             name="Username"
-            value={Username}
+            // value={Username}
             onchange={Changeusername}
-            {...register("username", { required: true })}
+            // {...register("Username", { required: true })}
           />
-          {errors.username && (
+          {/* {errors.Username && (
             <Alert variant="filled" severity="error">
               name is required.
             </Alert>
-          )}
-          <Label htmlFor="Username">YourName</Label>
+          )} */}
+          <Label htmlFor="Yourname">YourName</Label>
           <Input
             type="text"
             name="Yourname"
-            value={Yourname}
+            // value={Yourname}
             onChange={Changeyourname}
-            {...register("yourName", { required: true })}
+            // {...register("YourName", { required: true })}
           />
-          {errors.yourName && (
+          {/* {errors.YourName && (
             <Alert variant="filled" severity="error">
               yourName is required.
             </Alert>
-          )}
+          )} */}
           <Label htmlFor="Email">Email</Label>
           <Input
             type="text"
             name="Email"
-            value={Email}
+            // value={Email}
             onChange={ChangeEmail}
-            {...register("email", registerOptions.email)}
+            // {...register("Email", registerOptions.email)}
           />
-          {errors?.email && errors.email.message}
+          {/* {errors?.Email && errors.email.message} */}
           <Label htmlFor="Password<">Password</Label>
           <Input
             type="password"
             name="Password"
-            value={Password}
+            // value={Password}
             onChange={ChangePassword}
-            {...register("password", registerOptions.password)}
+            // {...register("Password", registerOptions.password)}
           />
-          {errors?.password && errors.password.message}
-          <Label htmlFor="ConfirmPassword">Confirm Password</Label>
-          <Input type="password" name="ConfirmPassword" />
+          {/* {errors?.Password && errors.password.message} */}
+          {/* <Label htmlFor="ConfirmPassword">Confirm Password</Label>
+          <Input type="password" name="ConfirmPassword" /> */}
           <Sec>
             <Box sx={{ minWidth: 120 }}>
               <FormControl fullWidth>
@@ -197,10 +207,10 @@ const Test = () => {
                   label="Role"
                   onChange={handleChange}
                 >
-                  <MenuItem value={0}>Manager</MenuItem>
-                  <MenuItem value={1}>Admin</MenuItem>
-                  <MenuItem value={2}>Staff</MenuItem>
-                  <MenuItem value={3}>QA</MenuItem>
+                  <MenuItem value="Manager">Manager</MenuItem>
+                  <MenuItem value="Admin">Admin</MenuItem>
+                  <MenuItem value="Staff">Staff</MenuItem>
+                  <MenuItem value="QA">QA</MenuItem>
                 </Select>
               </FormControl>
             </Box>

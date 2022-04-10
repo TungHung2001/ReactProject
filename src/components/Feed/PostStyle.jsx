@@ -97,6 +97,7 @@ export const Title = styled.span`
   overflow: auto;
   display: flex;
   font-size: 18px;
+  font-weight: 500;
 `
 export const MainLike = styled.div`
   display: flex;
@@ -137,11 +138,9 @@ export const SectionCom = styled.section`
   overflow: auto;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  flex-direction: column;
   height: 300px;
 `
-export const H3Com = styled.h3`
+export const H3Com = styled.h5`
   padding: 10px;
   @media only screen and (max-width: 380px) {
     font-size: 15px;
@@ -150,11 +149,12 @@ export const H3Com = styled.h3`
 export const Com = styled.div`
   display: flex;
   padding: 4px; //trbl
+
   @media only screen and (max-width: 380px) {
   }
 `
 export const PCom = styled.p`
-  padding: 10px;
+  padding: 3px 0px;
   @media only screen and (max-width: 380px) {
     font-size: 13px;
   }
@@ -194,9 +194,11 @@ export const ButtonCom = styled.button`
   margin: 10px;
 `
 export const ButtonMore = styled.button`
-  height: 30px;
-  width: 30px;
+  height: 32px;
+  width: 32px;
   border-radius: 50%;
+  align-items: center;
+  justify-content: center;
   border: none;
   :hover {
     background-color: #1775ee;

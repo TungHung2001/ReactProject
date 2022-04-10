@@ -9,6 +9,7 @@ import { Viewer } from "@react-pdf-viewer/core"
 import "@react-pdf-viewer/core/lib/styles/index.css"
 import { defaultLayoutPlugin } from "@react-pdf-viewer/default-layout"
 import "@react-pdf-viewer/default-layout/lib/styles/index.css"
+import TextareaAutosize from "@mui/material/TextareaAutosize"
 import styled from "styled-components"
 import axios from "axios"
 
@@ -65,11 +66,13 @@ const Addpdf = () => {
   const [Title, setTitle] = useState()
   const [Description, setDescription] = useState()
   const [IdeaList, setIdeaList] = useState([])
-  const handleSubmit1 = (e) => {
-    axios.post("http://localhost:3001/insert", {
-      Title: Title,
-      Description: Description,
-    })
+
+  const onSubmit = (e) => {
+    // axios.post("http://localhost:3001/insert", {
+    //   Title: Title,
+    //   Description: Description,
+    // })
+    console.log(e)
   }
   useEffect(() => {
     axios.get("http://localhost:3001/idea").then((response) => {
@@ -123,7 +126,11 @@ const Addpdf = () => {
 
   const [open, setOpen] = React.useState(false)
 
-  const handleClick = () => {
+  const handleClick = (e) => {
+    axios.post("http://localhost:3001/insert", {
+      Title: Title,
+      Description: Description,
+    })
     setOpen(true)
   }
 
@@ -141,13 +148,17 @@ const Addpdf = () => {
     register,
     handleSubmit,
     formState: { errors },
+    onBlur,
+    onChange,
+    name,
   } = useForm()
   const registerOptions = {
     titleval: {
       required: (
-        <Alert variant="filled" severity="error">
-          Titile is required
-        </Alert>
+        // <Alert variant="filled" severity="error">
+        //   Titile is required
+        // </Alert>
+        <p>error qqqq</p>
       ),
     },
     desval: {
@@ -162,27 +173,38 @@ const Addpdf = () => {
     <>
       <Main>
         {/* Upload PDF */}
-        <Form onSubmit={handleSubmit(handleSubmit1)}>
+        <Form onSubmit={handleSubmit(onSubmit)}>
           <H2>New Idea</H2>
           <Label>Title</Label>
+
           <Input
             placeholder="Title"
             type="text"
             onChange={changetile}
-            {...register("titleval", registerOptions.titleval)}
+            onBlur={onBlur}
+
+            // {...register("titleval", registerOptions.titleval)}
           />
 
-          {errors?.titleval && errors.titleval.message}
+          {/* {errors.titleval && errors.titleval.message} */}
 
           <Label>Description</Label>
-          <Input
+          <TextareaAutosize
+            aria-label="minimum height"
+            minRows={5}
+            placeholder="New Description"
+            style={{ width: "100%" }}
+            type="text"
+            onChange={changedes}
+          />
+          {/* <Input
             placeholder="Description"
             type="text"
             onChange={changedes}
             {...register("desval", registerOptions.desval)}
-          />
+          /> */}
 
-          {errors?.desval && errors.desval.message}
+          {/* {errors?.desval && errors.desval.message} */}
 
           <Input type="file" className="form-control" onChange={handleFile} />
 

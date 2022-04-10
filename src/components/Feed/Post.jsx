@@ -238,6 +238,8 @@ const Post = () => {
                     </PDF>
                   </PBR>
                 </PostBottom>
+
+                {/* Comment */}
                 <MainCom>
                   {" "}
                   <InputContainer>
@@ -254,9 +256,8 @@ const Post = () => {
                             <Com>
                               <ImgCom src="https://scontent.fhan2-2.fna.fbcdn.net/v/t39.30808-6/249333559_4524520644302729_8542170375727490088_n.jpg?_nc_cat=110&ccb=1-5&_nc_sid=8bfeb9&_nc_ohc=raFemxQOAwgAX94MIVK&_nc_ht=scontent.fhan2-2.fna&oh=00_AT8wXIHUPVIlw8XA5qCLgf9thDEj-lyxs9nugspaWHxJxA&oe=6250D2EA" />
                               <H3Com>Not Justin Bieber</H3Com>
-                              <br />
-                              <PCom>{value.Description}</PCom>
                             </Com>
+                            <PCom>{value.Description}</PCom>
                           </>
                         )
                       }
