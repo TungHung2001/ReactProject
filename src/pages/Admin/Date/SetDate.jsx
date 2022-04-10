@@ -1,9 +1,11 @@
 import * as React from "react"
+import { useState } from "react"
 import Snackbar from "@mui/material/Snackbar"
 import MuiAlert from "@mui/material/Alert"
 import TextField from "@mui/material/TextField"
 import styled from "styled-components"
 import { useForm } from "react-hook-form"
+import axios from "axios"
 const Main = styled.div`
   display: flex;
   align-items: center;
@@ -48,15 +50,44 @@ const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />
 })
 const SetDate = () => {
+  const [StartDeadline, setStartDeadline] = useState(new Date());
+  const [EndDeadline, setEndDeadline] = useState(new Date());
+  const [StartComment,setStartComment]= useState(new Date());
+  const [EndComment,setEndComment]= useState(new Date());
   const { handleSubmit } = useForm()
 
   const onSubmit = (e) => {
-    console.log(e)
+    axios.post("http://localhost:3001/datetime",{
+      StartDeadline:StartDeadline,
+      EndDeadline:EndDeadline,
+      StartComment:StartComment,
+      EndComment:EndComment
+    })
+    console.log(StartDeadline," " ,EndDeadline," ", StartComment," ", EndComment);
+    e.preventDefault()
+  }
+
+  const changeStartDeadline=(datetime)=>{
+    
+    setStartDeadline(datetime.target.value);
+  }
+  const changeEndDeadline= (datetime)=>{
+ 
+    setEndDeadline(datetime.target.value);
+  }
+  const changeStartComment=(datetime)=>{
+ 
+    setStartComment(datetime.target.value)
+  }
+  const changeEndComment=(datetime)=>{
+
+    setEndComment(datetime.target.value);
   }
   const [open, setOpen] = React.useState(false)
 
-  const handleClick = () => {
+  const handleClick = (e) => {
     setOpen(true)
+    
   }
 
   const handleClose = (event, reason) => {
@@ -69,71 +100,64 @@ const SetDate = () => {
   return (
     <>
       <Main>
-        <Form onSubmit={handleSubmit(onSubmit)}>
-          <H1>Set date</H1>
-          <Label>Title</Label>
-          <Input placeholder="title" type="text" />
+        <Form onSubmit={onSubmit}>
+          <H1>Set Dealine idea and comment</H1>
+          <H1>Deadline idea</H1>
+          {/* <Label>Title</Label>
+          <Input placeholder="title" type="text" /> */}
 
           <TextField
-            id="startdate"
+            id="StartDeadline"
+            name="StartDeadline"
+        
             label="Start Date"
             type="datetime-local"
-            defaultValue="2022-03-10T10:30"
             sx={{ width: 250, backgroundColor: "white" }}
             InputLabelProps={{
               shrink: true,
             }}
+            onChange={changeStartDeadline}
           />
           <br />
           <TextField
-            id="enddate"
+            id="EndDeadline"
+            name="EndDeadline"
+         
             label="End Date"
             type="datetime-local"
-            defaultValue="2022-03-10T12:00"
             sx={{ width: 250, backgroundColor: "white" }}
             InputLabelProps={{
               shrink: true,
             }}
+            onChange={changeEndDeadline}
           />
-          <Button type="submit" variant="outlined" onClick={handleClick}>
-            Submit
-          </Button>
-        </Form>
-        <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-          <Alert
-            onClose={handleClose}
-            severity="success"
-            sx={{ width: "100%" }}
-          >
-            Submit success!!!
-          </Alert>
-        </Snackbar>
-
-        <Form onSubmit={handleSubmit(onSubmit)}>
-          <H1>Set date Comment</H1>
-          <Label>Title</Label>
-          <Input placeholder="title" type="text" />
+          <H1>Deadline comment</H1>
+          {/* <Label>Title</Label>
+          <Input placeholder="title" type="text" /> */}
 
           <TextField
-            id="startdate"
+            id="StartComment"
+            name=" StartComment"
+     
             label="Start Date"
             type="datetime-local"
-            defaultValue="2022-03-10T10:30"
             sx={{ width: 250, backgroundColor: "white" }}
             InputLabelProps={{
               shrink: true,
             }}
+            onChange={changeStartComment}
           />
           <br />
           <TextField
-            id="enddate"
+            id="EndComment"
+            name="EndComment"
             label="End Date"
             type="datetime-local"
-            defaultValue="2022-03-10T12:00"
             sx={{ width: 250, backgroundColor: "white" }}
             InputLabelProps={{
               shrink: true,
             }}
+            onChange={changeEndComment}
           />
           <Button type="submit" variant="outlined" onClick={handleClick}>
             Submit

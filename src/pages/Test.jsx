@@ -62,10 +62,10 @@ const Test = () => {
     setRole(e.target.value)
   }
 
-  const Changeusername = (e) => {
+  const ChangeUsername = (e) => {
     setUsername(e.target.value)
   }
-  const Changeyourname = (e) => {
+  const ChangeYourname = (e) => {
     setYourname(e.target.value)
   }
 
@@ -77,7 +77,7 @@ const Test = () => {
     setPassword(e.target.value)
   }
 
-  const handleClick = () => {
+  const handleClick = (e) => {
     setOpen(true)
     axios.post("http://localhost:3001/register", {
       Username: Username,
@@ -103,8 +103,8 @@ const Test = () => {
     setOpen(false)
   }
   const registerOptions = {
-    name: { required: "Name is required" },
-    email: {
+    Username: { required: "Name is required" },
+    Email: {
       required: (
         <Alert variant="filled" severity="error">
           "Email is required"
@@ -119,7 +119,7 @@ const Test = () => {
         ),
       },
     },
-    password: {
+    Password: {
       required: (
         <Alert variant="filled" severity="error">
           "Password is required"
@@ -138,30 +138,30 @@ const Test = () => {
   return (
     <>
       <FormLog>
-        <Form onSubmit={handleSubmit(onSubmit)}>
+        <Form >
           <H1>Register</H1>
-          <Label htmlFor="username">Username</Label>
+          <Label htmlFor="Username">Username</Label>
           <Input
             type="text"
             name="Username"
             value={Username}
-            onchange={Changeusername}
-            {...register("username", { required: true })}
+            onchange={ChangeUsername}
+            {...register("Username", { required: true })}
           />
-          {errors.username && (
+          {errors.Username && (
             <Alert variant="filled" severity="error">
               name is required.
             </Alert>
           )}
-          <Label htmlFor="Username">YourName</Label>
+          <Label htmlFor="Yourname">YourName</Label>
           <Input
             type="text"
             name="Yourname"
             value={Yourname}
-            onChange={Changeyourname}
-            {...register("yourName", { required: true })}
+            onChange={ChangeYourname}
+            {...register("Yourname", { required: true })}
           />
-          {errors.yourName && (
+          {errors.Yourname && (
             <Alert variant="filled" severity="error">
               yourName is required.
             </Alert>
@@ -170,20 +170,20 @@ const Test = () => {
           <Input
             type="text"
             name="Email"
-            value={Email}
+          value={Email}
             onChange={ChangeEmail}
-            {...register("email", registerOptions.email)}
+            {...register("Email", registerOptions.Email)}
           />
-          {errors?.email && errors.email.message}
+          {errors?.Email && errors.Email.message}
           <Label htmlFor="Password<">Password</Label>
           <Input
             type="password"
             name="Password"
-            value={Password}
+           value={Password}
             onChange={ChangePassword}
-            {...register("password", registerOptions.password)}
+            {...register("Password", registerOptions.Password)}
           />
-          {errors?.password && errors.password.message}
+          {errors?.Password && errors.Password.message}
           <Label htmlFor="ConfirmPassword">Confirm Password</Label>
           <Input type="password" name="ConfirmPassword" />
           <Sec>
@@ -193,7 +193,7 @@ const Test = () => {
                 <Select
                   labelId=""
                   id=""
-                  value={Role}
+                 value={Role}
                   label="Role"
                   onChange={handleChange}
                 >
