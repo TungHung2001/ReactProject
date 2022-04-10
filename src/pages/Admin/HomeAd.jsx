@@ -1,5 +1,6 @@
 import React from "react"
 import styled from "styled-components"
+import DateLine from "../../components/Feed/DateLine"
 import Feed from "../../components/Feed/Feed"
 
 const Main = styled.div`
@@ -21,7 +22,9 @@ const HomeAd = () => {
       <Main>
         <Left />
         <Feed />
-        <Right />
+        <Right>
+          <DateLine />
+        </Right>
       </Main>
     </>
   )
