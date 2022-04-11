@@ -7,6 +7,7 @@ import Menu from "@mui/material/Menu"
 import MenuItem from "@mui/material/MenuItem"
 import DeleteIcon from "@mui/icons-material/Delete"
 import EditIcon from "@mui/icons-material/Edit"
+import Fade from "@mui/material/Fade"
 import {
   Main,
   Wrapper,
@@ -161,8 +162,8 @@ const Post = () => {
                   </PTL>
                   <PTR></PTR>
                   <ButtonMore
-                    id="demo-positioned-button"
-                    aria-controls={open ? "demo-positioned-menu" : undefined}
+                    id="fade-button"
+                    aria-controls={open ? "fade-menu" : undefined}
                     aria-haspopup="true"
                     aria-expanded={open ? "true" : undefined}
                     onClick={handleClick}
@@ -170,19 +171,14 @@ const Post = () => {
                     <MoreVertRoundedIcon />
                   </ButtonMore>
                   <Menu
-                    id="demo-positioned-menu"
-                    aria-labelledby="demo-positioned-button"
+                    id="fade-menu"
+                    MenuListProps={{
+                      "aria-labelledby": "fade-button",
+                    }}
                     anchorEl={anchorEl}
                     open={open}
                     onClose={handleClose}
-                    anchorOrigin={{
-                      vertical: "top",
-                      horizontal: "left",
-                    }}
-                    transformOrigin={{
-                      vertical: "top",
-                      horizontal: "left",
-                    }}
+                    TransitionComponent={Fade}
                   >
                     <MenuItem onClick={handleClose}>
                       <EditIcon />

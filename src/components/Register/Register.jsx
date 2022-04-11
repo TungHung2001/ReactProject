@@ -68,9 +68,9 @@ const LoginForm = () => {
       Role: Role,
     })
     if (e) {
-      alert("submit form successfuly!!!")
+      alert("Submit form successfuly!!!")
     } else {
-      alert("submit failure!!!")
+      alert("Submit failure!!!")
     }
   }
 
@@ -126,9 +126,10 @@ const LoginForm = () => {
       type: "password",
       placeholder: "Password",
       errorMessage:
-        "Password should be 8-20 characters and include at least 1 letter, 1 number and 1 special character!",
+        "Password should be 8-20 characters and include at least 1 number and 1 letter is uppercase!",
       label: "Password",
       // pattern: `^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$`,
+      pattern: "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$",
       required: true,
     },
     {
@@ -138,7 +139,7 @@ const LoginForm = () => {
       placeholder: "Confirm Password",
       errorMessage: "Passwords don't match!",
       label: "Confirm Password",
-      pattern: values.password,
+      pattern: values.Password,
       required: true,
     },
   ]
@@ -175,6 +176,7 @@ const LoginForm = () => {
                   value={Role}
                   label="Role"
                   onChange={handleChange}
+                  required
                 >
                   <MenuItem value="Manager">Manager</MenuItem>
                   <MenuItem value="Admin">Admin</MenuItem>

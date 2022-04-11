@@ -200,6 +200,7 @@ export const ButtonMore = styled.button`
   align-items: center;
   justify-content: center;
   border: none;
+  background-color: #f4f4f4;
   :hover {
     background-color: #1775ee;
   }
