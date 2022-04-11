@@ -1,16 +1,21 @@
-import React from "react"
+import React, { useState } from "react"
 import styled from "styled-components"
 import LightbulbIcon from "@mui/icons-material/Lightbulb"
 import CommentIcon from "@mui/icons-material/Comment"
 import WatchLaterIcon from "@mui/icons-material/WatchLater"
 import SortIcon from "@mui/icons-material/Sort"
 
+import Box from "@mui/material/Box"
+import InputLabel from "@mui/material/InputLabel"
+
+import FormControl from "@mui/material/FormControl"
+import Select from "@mui/material/Select"
 import Menu from "@mui/material/Menu"
 import MenuItem from "@mui/material/MenuItem"
 import Fade from "@mui/material/Fade"
 const Main = styled.div`
   width: 100%;
-  height: 300px;
+  height: 400px;
   border-radius: 20px;
   margin: 30px 10px;
   -webkit-box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
@@ -74,15 +79,24 @@ const ButtonIcon = styled.button`
     background-color: #29b6f6;
   }
 `
+const Sec = styled.div`
+  display: flex;
+  padding: 0px 20px;
+  border-radius: 10px;
+`
 
 const DateLine = () => {
   const [anchorEl, setAnchorEl] = React.useState(null)
+  const [Category, setCategory] = useState("")
   const open = Boolean(anchorEl)
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget)
   }
   const handleClose = () => {
     setAnchorEl(null)
+  }
+  const handleChange = (event) => {
+    setCategory(event.target.value)
   }
   return (
     <>
@@ -115,9 +129,30 @@ const DateLine = () => {
             <WatchLaterIcon />
             Dateline
           </H1>
-          <Icon1 />
-        </Icon>
 
+          <Icon1></Icon1>
+        </Icon>
+        <Sec>
+          <Box sx={{ minWidth: "100%" }}>
+            <FormControl fullWidth>
+              <InputLabel id="">Category</InputLabel>
+              <Select
+                labelId=""
+                id=""
+                value={Category}
+                label="Category"
+                onChange={handleChange}
+                required
+              >
+                <MenuItem value="Phone">Phone</MenuItem>
+                <MenuItem value="batman">batman</MenuItem>
+                <MenuItem value="Ironman">Ironman</MenuItem>
+                <MenuItem value="QA">QA</MenuItem>
+                {/* Chon role */}
+              </Select>
+            </FormControl>
+          </Box>
+        </Sec>
         <H2>
           <LightbulbIcon />
           Idea DeadLine
