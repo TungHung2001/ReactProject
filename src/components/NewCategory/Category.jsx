@@ -3,6 +3,8 @@ import Snackbar from "@mui/material/Snackbar"
 import MuiAlert from "@mui/material/Alert"
 import styled from "styled-components"
 import { useForm } from "react-hook-form"
+import { useState } from "react"
+import axios from "axios"
 const Main = styled.div`
   display: flex;
   align-items: center;
@@ -45,9 +47,12 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 })
 
 const Category = () => {
+  const [cat_name, setCat] = useState('')
   const { handleSubmit } = useForm()
   const onSubmit = (e) => {
-    console.log(e)
+    axios.post("http://localhost:3001/NewCategory",{
+      cat_name:cat_name
+    })
   }
   const [open, setOpen] = React.useState(false)
 
@@ -59,17 +64,22 @@ const Category = () => {
     if (reason === "clickaway") {
       return
     }
-
     setOpen(false)
   }
-
+  const onchange = (e)=>{
+    setCat(e.target.value)
+  }
   return (
     <>
       <Main>
-        <Form onSubmit={handleSubmit(onSubmit)}>
+        <Form onSubmit={handleSubmit(onSubmit) }>
           <H2>New Category</H2>
           <Label>Category</Label>
-          <Input placeholder="Category" type="text" />
+          <Input 
+          placeholder="Category" 
+          type="text" 
+          value={cat_name}
+          onChange={onchange}/>
 
           <Button type="submit" variant="outlined" onClick={handleClick}>
             Submit

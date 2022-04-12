@@ -54,14 +54,13 @@ const Sec = styled.div`
 
 const LoginForm = () => {
   const [Role, setRole] = useState("")
-  const [Username, setUsername] = useState("")
   const [Yourname, setYourname] = useState("")
   const [Email, setEmail] = useState("")
   const [Password, setPassword] = useState("")
 
   const addToList = (e) => {
+    e.preventDefault();
     axios.post("http://localhost:3001/register", {
-      Username: Username,
       Yourname: Yourname,
       Email: Email,
       Password: Password,
@@ -78,7 +77,6 @@ const LoginForm = () => {
     setRole(event.target.value)
   }
   const [values, setValues] = useState({
-    Username: "",
     Yourname: "",
     Email: "",
     Password: "",
@@ -88,18 +86,6 @@ const LoginForm = () => {
   const inputs = [
     {
       id: 1,
-      name: "Username",
-      type: "text",
-      placeholder: "Username",
-      errorMessage:
-        "Username should be 3-16 characters and shouldn't include any special character!",
-      label: "Username",
-      pattern: "^[A-Za-z0-9]{3,16}$",
-      required: true,
-    },
-
-    {
-      id: 2,
       name: "Yourname",
       type: "text",
       placeholder: "Your name",
@@ -111,7 +97,7 @@ const LoginForm = () => {
     },
 
     {
-      id: 3,
+      id: 2,
       name: "Email",
       type: "email",
       placeholder: "Email",
@@ -121,7 +107,7 @@ const LoginForm = () => {
     },
 
     {
-      id: 4,
+      id: 3,
       name: "Password",
       type: "password",
       placeholder: "Password",
@@ -133,7 +119,7 @@ const LoginForm = () => {
       required: true,
     },
     {
-      id: 5,
+      id: 4,
       name: "ConfirmPassword",
       type: "password",
       placeholder: "Confirm Password",
@@ -146,8 +132,7 @@ const LoginForm = () => {
 
   const onChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value })
-    if (e.target.name === "Username") setUsername(e.target.value)
-    else if (e.target.name === "Yourname") setYourname(e.target.value)
+    if (e.target.name === "Yourname") setYourname(e.target.value)
     else if (e.target.name === "Email") setEmail(e.target.value)
     else if (e.target.name === "Password") setPassword(e.target.value)
   }

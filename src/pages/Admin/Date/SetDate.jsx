@@ -1,5 +1,5 @@
 import * as React from "react"
-import { useState } from "react"
+import { useState,useEffect } from "react"
 import Snackbar from "@mui/material/Snackbar"
 import MuiAlert from "@mui/material/Alert"
 import TextField from "@mui/material/TextField"
@@ -100,6 +100,12 @@ const SetDate = () => {
   const handleClick = (e) => {
     setOpen(true)
   }
+  const [CatList, setCatList] = useState([])
+  useEffect(() => {
+    axios.get("http://localhost:3001/AllCategory").then((response) => {
+      setCatList(response.data)
+    })
+  }, [])
 
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
@@ -114,21 +120,8 @@ const SetDate = () => {
         <Form onSubmit={onSubmit}>
           <H1>Set Dealine idea and comment</H1>
           <H2>Deadline idea</H2>
-          {/* <Label>Title</Label>
-          <Input placeholder="title" type="text" /> */}
 
-          <TextField
-            id="StartDeadline"
-            name="StartDeadline"
-            label="Start Date"
-            type="datetime-local"
-            sx={{ width: "100%", backgroundColor: "white" }}
-            InputLabelProps={{
-              shrink: true,
-            }}
-            onChange={changeStartDeadline}
-          />
-          <br />
+
           <TextField
             id="EndDeadline"
             name="EndDeadline"
@@ -144,18 +137,6 @@ const SetDate = () => {
           {/* <Label>Title</Label>
           <Input placeholder="title" type="text" /> */}
 
-          <TextField
-            id="StartComment"
-            name=" StartComment"
-            label="Start Date"
-            type="datetime-local"
-            sx={{ width: "100%", backgroundColor: "white" }}
-            InputLabelProps={{
-              shrink: true,
-            }}
-            onChange={changeStartComment}
-          />
-          <br />
           <TextField
             id="EndComment"
             name="EndComment"

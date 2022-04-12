@@ -1,31 +1,32 @@
 import React, { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { Main, Form, Button, Label, Img, Input } from "./Loginstyle"
-
+import axios from "axios"
 import AuthService from "../../services/auth.service"
 import Alert from "@mui/material/Alert"
 const Login = () => {
-  const [email, setEmail] = useState()
-  const [password, setPassword] = useState()
+  const [Email, setEmail] = useState()
+  const [Password, setPassword] = useState()
+  
 
   const navigate = useNavigate()
 
   const handleLogin = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
     try {
-      await AuthService.login(email, password).then(
+      await AuthService.login(Email, Password).then(
         () => {
-          navigate("/Home")
-          window.location.reload()
+          navigate("/Home");
+          window.location.reload();
         },
         (error) => {
-          console.log(error)
+          console.log(error);
         }
-      )
+      );
     } catch (err) {
-      console.log(err)
+      console.log(err);
     }
-  }
+  };
 
   return (
     <>
@@ -40,7 +41,7 @@ const Login = () => {
           <Input
             type="text"
             placeholder="email"
-            value={email}
+            value={Email}
             onChange={(e) => setEmail(e.target.value)}
           />
 
@@ -48,7 +49,7 @@ const Login = () => {
           <Input
             type="password"
             placeholder="password"
-            value={password}
+            value={Password}
             onChange={(e) => setPassword(e.target.value)}
           />
 

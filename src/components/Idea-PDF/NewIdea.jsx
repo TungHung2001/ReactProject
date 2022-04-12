@@ -65,7 +65,7 @@ const Label = styled.label`
 const Addpdf = () => {
   const [Title, setTitle] = useState()
   const [Description, setDescription] = useState()
-  const [IdeaList, setIdeaList] = useState([])
+  // const [IdeaList, setIdeaList] = useState([])
 
   const onSubmit = (e) => {
     // axios.post("http://localhost:3001/insert", {
@@ -74,11 +74,7 @@ const Addpdf = () => {
     // })
     console.log(e)
   }
-  useEffect(() => {
-    axios.get("http://localhost:3001/idea").then((response) => {
-      setIdeaList(response.data)
-    })
-  }, [])
+
 
   const changetile = (e) => {
     setTitle(e.target.value)
@@ -130,6 +126,7 @@ const Addpdf = () => {
     axios.post("http://localhost:3001/insert", {
       Title: Title,
       Description: Description,
+      pdfFile:pdfFile
     })
     setOpen(true)
   }
@@ -252,14 +249,6 @@ const Addpdf = () => {
         {/* render this if we have pdfFile state null   */}
         {!pdfFile && <>No file is selected yet</>}
       </Pdf>
-      {IdeaList.map((val, key) => {
-        return (
-          <>
-            <h1>{val.Title}</h1>
-            <h1>{val.Description}</h1>
-          </>
-        )
-      })}
     </>
   )
 }

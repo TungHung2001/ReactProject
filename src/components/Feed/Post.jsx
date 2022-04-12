@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useState, Component } from "react"
 import MoreVertRoundedIcon from "@mui/icons-material/MoreVertRounded"
 import axios from "axios"
 import ThumbUpOffAltSharpIcon from "@mui/icons-material/ThumbUpOffAltSharp"
@@ -43,14 +43,31 @@ import {
 } from "./PostStyle"
 import "./Like.css"
 
+
 const Post = () => {
+ 
   // const [Like, setlike] = useState(1) // add like
   // const [Dislike, setdislike] = useState(1) // add dislike
 
   const [likeactive, setlikeactive] = useState(false)
   const [dislikeactive, setdislikeactive] = useState(false)
   const [Comment, setComment] = useState()
-
+  const [user,setUser] = useState()
+  
+  // axios.get('http://localhost:3001/user',{
+  // headers:{
+  //   Athorization:'Ender'+localStorage.getItem('token')
+  // }}
+  // ).then(
+  //   res=>{
+  //     this.setState({
+  //       user:res.data
+  //     })
+  //   },
+  //   err =>{
+  //     console.log(err)
+  //   }
+  // )
   const btnlike = (id) => {
     if (likeactive) {
       setlikeactive(false)
@@ -123,6 +140,7 @@ const Post = () => {
 
   const [IdeaList, setIdeaList] = useState([])
   const [CMTList, setCMTList] = useState([])
+
   useEffect(() => {
     axios.get("http://localhost:3001/idea").then((response) => {
       setIdeaList(response.data)
@@ -147,6 +165,8 @@ const Post = () => {
   const handleSubmit = (e) => {
     e.preventDefault()
   }
+
+
   return (
     <>
       {IdeaList.map((val, key) => {
@@ -267,6 +287,7 @@ const Post = () => {
       })}
     </>
   )
-}
+};
 
-export default Post
+
+export default Post 

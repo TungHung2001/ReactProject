@@ -1,35 +1,25 @@
 import axios from "axios";
 
-const API_URL = "/auth";
+const API_URL = "http://localhost:3001/";
 
-const signup = (email, password) => {
-  return axios
-    .post(API_URL + "/signup", {
-      email,
-      password,
-    })
-    .then((response) => {
-      if (response.data.accessToken) {
-        localStorage.setItem("user", JSON.stringify(response.data));
-      }
-
-      return response.data;
+const signup = async (Email, Password) => {
+  const response = await axios
+    .post(API_URL + "/register", {
+      Email,
+      Password,
     });
 };
 
-const login = (email, password) => {
-  return axios
-    .post(API_URL + "/login", {
-      email,
-      password,
-    })
-    .then((response) => {
-      if (response.data.accessToken) {
-        localStorage.setItem("user", JSON.stringify(response.data));
-      }
-
-      return response.data;
+const login = async (Email, Password) => {
+  const response = await axios
+    .post("http://localhost:3001/login", {
+      Email,
+      Password,
     });
+  if (response.data.accessToken) {
+    localStorage.setItem("user", JSON.stringify(response.data));
+  }
+  return response.data;
 };
 
 const logout = () => {
